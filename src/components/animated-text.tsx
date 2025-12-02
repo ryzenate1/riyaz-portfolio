@@ -63,7 +63,7 @@ const AnimatedText = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.5 }}
-        className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-mono text-[#39FF14] mb-4 sm:mb-6 md:mb-8 lg:mb-10 whitespace-nowrap leading-tight"
+        className="text-[35px] sm:text-[47px] md:text-[47px] lg:text-[59px] font-mono text-[#39FF14] mb-4 sm:mb-6 md:mb-8 lg:mb-10 whitespace-nowrap leading-tight"
         style={{
           textShadow: '0 0 8px rgba(57, 255, 20, 0.6)',
           fontFamily: 'JetBrains Mono, monospace'
@@ -93,7 +93,7 @@ const AnimatedText = () => {
           initial="hidden"
           animate="visible"
           custom={0}
-          className={`${titleH1Class} text-6xl sm:text-7xl md:text-7xl lg:text-8xl xl:text-9xl text-center mb-2 whitespace-nowrap`}
+          className={`${titleH1Class} text-[59px] sm:text-[71px] md:text-[71px] lg:text-[95px] xl:text-[127px] text-center mb-2 whitespace-nowrap`}
           style={{
             textShadow: '0 0 8px rgba(255, 255, 255, 0.5)',
             ...poppinsStyle,
@@ -112,7 +112,7 @@ const AnimatedText = () => {
           initial="hidden"
           animate="visible"
           custom={1}
-          className={`${titleH1Class} text-6xl sm:text-7xl md:text-7xl lg:text-8xl xl:text-9xl text-center mb-2`}
+          className={`${titleH1Class} text-[59px] sm:text-[71px] md:text-[71px] lg:text-[95px] xl:text-[127px] text-center mb-2`}
           style={{
             textShadow: '0 0 8px rgba(255, 255, 255, 0.5)',
             ...poppinsStyle,
@@ -136,7 +136,7 @@ const AnimatedText = () => {
           initial="hidden"
           animate="visible"
           custom={2}
-          className={`${titleH1Class} text-5xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl text-center`}
+          className={`${titleH1Class} text-[47px] sm:text-[59px] md:text-[59px] lg:text-[71px] xl:text-[95px] text-center`}
           style={{
             textShadow: '0 0 8px rgba(255, 255, 255, 0.5)',
             ...poppinsStyle,

@@ -55,7 +55,7 @@ function ServicesGrid() {
       <div
         ref={scrollRef}
         onMouseMove={handleMouseMove}
-        className="group gap-6 flex overflow-x-auto snap-x snap-mandatory scroll-smooth lg:grid lg:grid-cols-5 lg:overflow-visible max-lg:gap-4 max-lg:-mx-4 max-lg:px-4 max-lg:scrollbar-hide max-lg:overscroll-x-contain max-lg:touch-pan-x edge-fade-x"
+        className="group gap-6 flex overflow-x-auto snap-x snap-mandatory scroll-smooth lg:grid lg:grid-cols-5 lg:overflow-visible max-lg:gap-4 max-lg:-mx-4 max-lg:px-4 max-lg:scrollbar-hide edge-fade-x"
         style={{
           scrollbarWidth: 'none',
           msOverflowStyle: 'none'

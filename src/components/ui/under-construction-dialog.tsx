@@ -15,7 +15,7 @@ const contactOptions = [
   {
     name: 'WhatsApp',
     icon: MessageCircle,
-    href: 'https://wa.me/+919876543210', // TODO: Replace with your actual WhatsApp number
+    href: 'https://wa.me/917200672127',
     color: 'bg-green-600 hover:bg-green-700',
   },
   {
