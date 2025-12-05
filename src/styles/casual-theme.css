@@ -164,7 +164,7 @@
   }
 }
 
-/* Mobile - text first, SVG below on scroll */
+/* Mobile - text first, SVG below */
 @media (max-width: 768px) {
   .hero-section {
     grid-template-columns: 1fr;
@@ -172,15 +172,33 @@
     min-height: auto;
   }
   
+  .hero-section::before {
+    display: none;
+  }
+  
   .hero-section::after {
     width: 100%;
     clip-path: none;
     top: 0;
-    height: 100vh;
+    height: 100%;
   }
   
   .hero-illustration {
-    display: none !important;
+    display: flex !important;
+    order: 2;
+    min-height: 45vh;
+    padding: 1.5rem 1rem 2rem;
+    background: linear-gradient(145deg, #f5f5f5 0%, #e8e8e8 100%);
+    position: relative;
+    z-index: 2;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hero-illustration svg {
+    max-width: 90%;
+    height: auto;
+    max-height: 40vh;
   }
   
   .hero-content {

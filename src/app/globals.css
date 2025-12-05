@@ -41,11 +41,15 @@ canvas {
 }
 
 /* Allow pointer events on interactive elements containing images */
+a,
 a img,
+button,
 button img,
 [role="button"] img,
-.clickable img {
-  pointer-events: auto;
+.clickable img,
+[href] {
+  pointer-events: auto !important;
+  cursor: pointer;
 }
 
 /* Disable print - hide all content when printing */

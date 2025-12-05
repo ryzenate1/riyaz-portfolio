@@ -107,7 +107,16 @@ export function AboutSection() {
           <Reveal delay={0.4}>
             <p className="text-xl md:text-2xl text-[#555] max-w-2xl leading-relaxed">
               A high schooler from St. Joseph&apos;s studying Computer Science, 
-              running on curiosity and caffeine.
+              running on curiosity and caffeine. An ex-
+              <a 
+                href="https://www.trustchildren.org/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#d4af37] hover:underline"
+              >
+                Gurukulam
+              </a>{' '}
+              student.
             </p>
           </Reveal>
 
@@ -135,15 +144,11 @@ export function AboutSection() {
 
       {/* ==================== MEET ME - PROFILE IMAGE ==================== */}
       <section className="py-24 md:py-32 bg-[#faf8f5] relative overflow-hidden">
-        {/* Subtle decorative elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 border border-[#d4af37]/20 rounded-full" />
-        <div className="absolute bottom-20 right-10 w-48 h-48 border border-[#1a1a2e]/10 rounded-full" />
-        
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
             {/* Image Side */}
             <Reveal className="relative">
-              <div className="relative">
+              <div className="relative -mt-28 md:-mt-44">
                 {/* Decorative frame */}
                 <div className="absolute -inset-4 md:-inset-6 border-2 border-[#d4af37]/30 -rotate-3" />
                 <div className="absolute -inset-4 md:-inset-6 border-2 border-[#1a1a2e]/10 rotate-2" />
@@ -201,7 +206,7 @@ export function AboutSection() {
               
               <Reveal delay={0.3}>
                 <p className="text-lg md:text-xl text-[#555] leading-relaxed mb-8">
-                  A 17-year-old from Trichy who codes, lifts, and questions everything. 
+                  A 17-year-old from Chennai who codes, lifts, and questions everything. 
                   This portfolio is my digital home — raw, real, and always evolving.
                 </p>
               </Reveal>

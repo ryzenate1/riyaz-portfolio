@@ -20,6 +20,16 @@ export function CasualHeader() {
   const [isToggleHovered, setIsToggleHovered] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
+  const [showDevHint, setShowDevHint] = useState(true);
+
+  // Auto-hide the "Developer? Curious?" hint after 2.5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowDevHint(false);
+    }, 2500);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   // Track scroll to hide hint - even small scroll hides it
   useEffect(() => {
@@ -183,9 +193,9 @@ export function CasualHeader() {
               <div className="flex items-center gap-3">
                 {/* Pro toggle */}
                 <div className="relative">
-                  {/* Arrow hint - hides on scroll */}
+                  {/* Arrow hint - hides on scroll or after 2.5s */}
                   <AnimatePresence>
-                    {!hasScrolled && (
+                    {!hasScrolled && showDevHint && (
                       <motion.div 
                         className="absolute top-[50px] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none"
                         initial={{ opacity: 0, y: 10 }}
