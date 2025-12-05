@@ -1435,7 +1435,7 @@ export function BusBuddyMLPredictor() {
     { id: 2, route: '23B', stop: 'Tech Park', eta: 12, confidence: 87, trend: 'improving' },
     { id: 3, route: '15C', stop: 'City Mall', eta: 8, confidence: 78, trend: 'delayed' },
   ]);
-  const [accuracy, setAccuracy] = useState({ mae: 2.3, samples: 1247 });
+  const accuracy = { mae: 2.3, samples: 1247 };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -1524,7 +1524,6 @@ export function BusBuddyMLPredictor() {
 
 // 6. WebSocket Status Panel
 export function BusBuddyWebSocket() {
-  const [connected, setConnected] = useState(true);
   const [messages, setMessages] = useState([
     { id: 1, type: 'location', route: '47A', time: '2s ago' },
     { id: 2, type: 'occupancy', route: '23B', time: '4s ago' },
@@ -1543,11 +1542,11 @@ export function BusBuddyWebSocket() {
         };
         return [newMsg, ...prev.slice(0, 4)];
       });
-      setStats(prev => ({
+      setStats({
         messagesPerSec: Math.floor(Math.random() * 8 + 8),
         activeRooms: Math.floor(Math.random() * 4 + 6),
         clients: Math.floor(Math.random() * 50 + 140),
-      }));
+      });
     }, 2500);
     return () => clearInterval(interval);
   }, []);
@@ -1559,11 +1558,9 @@ export function BusBuddyWebSocket() {
           <Plug className="w-5 h-5 text-[#E83E59]" />
           <h4 className="font-semibold text-neutrals-100">WebSocket</h4>
         </div>
-        <div className={`flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium ${
-          connected ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
-        }`}>
-          <span className={`w-2 h-2 rounded-full ${connected ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
-          {connected ? 'Connected' : 'Disconnected'}
+        <div className="flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-400">
+          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+          Connected
         </div>
       </div>
 
@@ -1611,7 +1608,7 @@ export function BusBuddyWebSocket() {
 // 7. Offline Mode Indicator
 export function BusBuddyOfflineMode() {
   const [isOffline, setIsOffline] = useState(false);
-  const [cachedData, setCachedData] = useState({ buses: 12, routes: 8, lastSync: '2 min ago' });
+  const cachedData = { buses: 12, routes: 8, lastSync: '2 min ago' };
 
   return (
     <div className="w-full max-w-sm">

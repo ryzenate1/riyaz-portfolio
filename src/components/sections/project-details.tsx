@@ -17,6 +17,7 @@ export default function ProjectDetailsSection({ project }: Props) {
         aria-labelledby="project-details-heading"
         className="bg-neutrals-900 after:from-neutrals-900 after:to-neutrals-900/60 relative flex min-h-screen w-full py-[14vh] after:absolute after:inset-0 after:h-full after:w-full after:bg-gradient-to-t"
       >
+        {/* eslint-disable-next-line @next/next/no-img-element -- Sanity CDN provides optimized images */}
         <img
           alt={project.poster.alt}
           loading="eager"

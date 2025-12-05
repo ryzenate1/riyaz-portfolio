@@ -52,7 +52,7 @@ export function ProjectHeader({ project }: ProjectHeaderProps) {
           transition={{ delay: 0.3 }}
           className="flex gap-6"
         >
-          {project.stats.map((stat, i) => (
+          {project.stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <div 
                 className="text-2xl md:text-3xl font-bold"

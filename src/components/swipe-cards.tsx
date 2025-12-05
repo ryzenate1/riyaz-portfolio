@@ -160,7 +160,7 @@ function SwipeCard({
 export function SwipeCards() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleSwipe = (direction: 'left' | 'right') => {
+  const handleSwipe = () => {
     setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % projects.length);
     }, 150);
@@ -198,7 +198,7 @@ export function SwipeCards() {
       {/* Controls */}
       <div className="flex justify-center items-center gap-6 mt-8">
         <button
-          onClick={() => handleSwipe('left')}
+          onClick={() => handleSwipe()}
           className="w-11 h-11 rounded-full border border-neutrals-700 flex items-center justify-center text-neutrals-500 hover:text-neutrals-300 hover:border-neutrals-600 transition-colors"
           aria-label="Skip project"
         >

@@ -16,8 +16,9 @@ interface SmoothScrollProviderProps {
 }
 
 export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
-  const [lenis, setLenis] = useState<Lenis | null>(null);
+  const [contextValue, setContextValue] = useState<SmoothScrollContextType>({ lenis: null });
   const rafRef = useRef<number | null>(null);
+  const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
     const lenisInstance = new Lenis({
@@ -29,7 +30,9 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
       touchMultiplier: 2,
     });
 
-    setLenis(lenisInstance);
+    lenisRef.current = lenisInstance;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Required to expose Lenis instance to context consumers
+    setContextValue({ lenis: lenisInstance });
 
     function raf(time: number) {
       lenisInstance.raf(time);
@@ -43,11 +46,12 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
         cancelAnimationFrame(rafRef.current);
       }
       lenisInstance.destroy();
+      lenisRef.current = null;
     };
   }, []);
 
   return (
-    <SmoothScrollContext.Provider value={{ lenis }}>
+    <SmoothScrollContext.Provider value={contextValue}>
       {children}
     </SmoothScrollContext.Provider>
   );

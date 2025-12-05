@@ -25,7 +25,6 @@ const BootloaderSequence: React.FC<BootloaderProps> = ({ onBootComplete }) => {
   // Fallback timeout to ensure bootloader always completes
   useEffect(() => {
     const fallbackTimeout = setTimeout(() => {
-      console.log('Fallback timeout triggered - forcing bootloader completion');
       onBootComplete();
     }, 15000); // 15 seconds fallback
 
@@ -87,8 +86,6 @@ const BootloaderSequence: React.FC<BootloaderProps> = ({ onBootComplete }) => {
   ], [randomIP]);
 
   useEffect(() => {
-    console.log(`Boot progress: Line ${currentLineIndex}/${bootSequence.length}, Char ${currentCharIndex}`);
-    
     if (currentLineIndex < bootSequence.length) {
       const currentLine = bootSequence[currentLineIndex] || '';
 
@@ -112,7 +109,6 @@ const BootloaderSequence: React.FC<BootloaderProps> = ({ onBootComplete }) => {
           return () => clearTimeout(timeout);
         } else {
           // Line complete, move to next line
-          console.log(`Completing line ${currentLineIndex}: "${currentLine}"`);
           const timeout = setTimeout(() => {
             setCurrentLineIndex(prev => prev + 1);
             setCurrentCharIndex(0);
@@ -122,7 +118,6 @@ const BootloaderSequence: React.FC<BootloaderProps> = ({ onBootComplete }) => {
         }
       } else {
         // Other lines: full line at once (including empty lines)
-        console.log(`Processing fast line ${currentLineIndex}: "${currentLine}"`);
         let lineDelay = 20; // Fast default timing
         
         // Add dramatic pauses for certain lines
@@ -146,8 +141,6 @@ const BootloaderSequence: React.FC<BootloaderProps> = ({ onBootComplete }) => {
       }
     } else {
       // Boot sequence complete - properly handle completion
-      console.log('Boot sequence complete, starting completion phase');
-      
       const completeSequence = () => {
         setCleared(true);
         
@@ -155,7 +148,6 @@ const BootloaderSequence: React.FC<BootloaderProps> = ({ onBootComplete }) => {
           setShowAccessGranted(true);
           
           setTimeout(() => {
-            console.log('Calling onBootComplete');
             onBootComplete();
           }, 1000);
         }, 500);
@@ -268,7 +260,6 @@ function Bootloader() {
   useLockBody(isBootloaderActive);
 
   const handleBootComplete = useCallback(() => {
-    console.log('Boot complete called'); // Debug log
     // Mark as visited and set timestamp
     localStorage.setItem('ryzen-studio-visited', 'true');
     localStorage.setItem('ryzen-studio-last-visit', Date.now().toString());
@@ -282,7 +273,6 @@ function Bootloader() {
   useEffect(() => {
     const handleEscapeKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isBootloaderActive) {
-        console.log('Escape key pressed, closing bootloader');
         handleBootComplete();
       }
     };

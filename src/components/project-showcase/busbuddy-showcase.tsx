@@ -129,6 +129,13 @@ function LiveBusMapDemo() {
   );
 }
 
+// Voice Command Sample Commands
+const voiceSampleCommands = [
+  { text: 'Where is bus 47A?', response: '🚌 Bus 47A is 2 stops away, arriving in ~5 minutes' },
+  { text: 'Show buses to Central', response: '📍 3 buses heading to Central: 23B (8 min), 15C (12 min), 47A (18 min)' },
+  { text: 'Bus 23B kitna door hai?', response: '🚌 Bus 23B 3 stops dur hai, lagbhag 7 minute mein aayegi' },
+];
+
 // Voice Command Demo
 function VoiceCommandDemo() {
   const [isListening, setIsListening] = useState(false);
@@ -142,19 +149,13 @@ function VoiceCommandDemo() {
     { code: 'ta-IN', name: 'தமிழ்', flag: '🇮🇳' },
   ];
 
-  const sampleCommands = [
-    { text: 'Where is bus 47A?', response: '🚌 Bus 47A is 2 stops away, arriving in ~5 minutes' },
-    { text: 'Show buses to Central', response: '📍 3 buses heading to Central: 23B (8 min), 15C (12 min), 47A (18 min)' },
-    { text: 'Bus 23B kitna door hai?', response: '🚌 Bus 23B 3 stops dur hai, lagbhag 7 minute mein aayegi' },
-  ];
-
   const handleVoiceClick = useCallback(() => {
     setIsListening(true);
     setTranscript('');
     setResponse('');
     
     // Simulate voice recognition
-    const command = sampleCommands[Math.floor(Math.random() * sampleCommands.length)];
+    const command = voiceSampleCommands[Math.floor(Math.random() * voiceSampleCommands.length)];
     
     // Type out transcript
     let i = 0;

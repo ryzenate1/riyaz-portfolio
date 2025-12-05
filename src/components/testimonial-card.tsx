@@ -15,6 +15,7 @@ export default function TestimonialCard({ testimonial }: Props) {
         <div className="mt-6 flex items-center">
           <div className="me-3 flex">
             <div className="bg-shiny-frame h-10 w-10 overflow-hidden rounded-full border border-transparent">
+              {/* eslint-disable-next-line @next/next/no-img-element -- Sanity CDN provides optimized images */}
               <img
                 alt={(testimonial.logo ?? testimonial.avatar).alt}
                 className="h-full w-full"
@@ -33,6 +34,7 @@ export default function TestimonialCard({ testimonial }: Props) {
             </div>
             {testimonial.logo && (
               <div className="bg-shiny-frame -ms-3 h-10 w-10 overflow-hidden rounded-full border border-transparent">
+                {/* eslint-disable-next-line @next/next/no-img-element -- Sanity CDN provides optimized images */}
                 <img
                   alt={testimonial.avatar.alt}
                   className="h-full w-full"

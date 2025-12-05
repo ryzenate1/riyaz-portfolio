@@ -129,9 +129,10 @@ riyaz@portfolio/root:~$ _
     return () => clearTimeout(timeoutId);
   }, [startTyping, displayedText, terminalContent, typingSpeed, isTypingComplete]);
 
-  // Update typingComplete state when typing finishes
+  // Update typingComplete when typing finishes
   useEffect(() => {
     if (isTypingComplete && !typingComplete) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- Required to sync derived state for scroll behavior
       setTypingComplete(true);
     }
   }, [isTypingComplete, typingComplete]);
