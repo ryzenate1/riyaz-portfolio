@@ -60,8 +60,8 @@ export default function FitnessPage() {
             </motion.h1>
             
             <motion.p variants={fadeInUp} className="casual-paragraph">
-              Kinesiology isn&apos;t just a field of study for me—it&apos;s a way of understanding 
-              how we move, grow, and become stronger versions of ourselves.
+              Training isn&apos;t just exercise for me—it&apos;s a way of building discipline, 
+              patience, and the kind of consistency that carries into everything else.
             </motion.p>
           </motion.div>
         </div>
@@ -96,9 +96,9 @@ export default function FitnessPage() {
                   between training smart and just training hard.
                 </p>
                 <p>
-                  That curiosity led me to kinesiology—the science of human movement. What I 
-                  discovered transformed not just my body, but my entire approach to life. 
-                  Discipline, patience, and the ability to show up even when motivation fades.
+                  That curiosity led me to study how training actually works — how the body 
+                  adapts, what recovery really means, and how to progress without burning out. 
+                  It transformed not just my body, but my entire approach to life. 
                 </p>
                 <p>
                   Today, fitness is my anchor. It&apos;s where I find clarity, build resilience, 

@@ -1,44 +1,39 @@
 'use client';
 
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/ui/icons';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-// Typography imports removed - not needed for under construction mode
 import { siteConfig } from '@/lib/config/site';
-import { UnderConstructionDialog } from '@/components/ui/under-construction-dialog';
+
+const GMAIL_COMPOSE_URL =
+  'https://mail.google.com/mail/?view=cm&fs=1&to=riyazakthar46@gmail.com';
 
 function ContactForm() {
-  const [showDialog, setShowDialog] = useState(false);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setShowDialog(true);
+    window.open(GMAIL_COMPOSE_URL, '_blank', 'noopener,noreferrer');
   };
 
   const handleEmailClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    setShowDialog(true);
+    window.open(GMAIL_COMPOSE_URL, '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <>
-      <UnderConstructionDialog
-        isOpen={showDialog}
-        onClose={() => setShowDialog(false)}
-        title="🚧 Contact Form Under Construction"
-        message="Our contact form is being upgraded for a better experience. Please reach out through these platforms instead:"
-      />
-      
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
         <fieldset className="group flex flex-col gap-y-6">
+          <legend className="sr-only">Contact information</legend>
           <div>
             <Label htmlFor="contact-form-name">Name</Label>
             <Input
               id="contact-form-name"
+              name="name"
               type="text"
+              autoComplete="name"
+              required
+              maxLength={100}
               placeholder="Your name"
             />
           </div>
@@ -46,7 +41,11 @@ function ContactForm() {
             <Label htmlFor="contact-form-email">Email</Label>
             <Input
               id="contact-form-email"
+              name="email"
               type="email"
+              autoComplete="email"
+              required
+              maxLength={254}
               placeholder="your@email.com"
             />
           </div>
@@ -56,10 +55,14 @@ function ContactForm() {
               className="flex items-center justify-between"
             >
               <span>What&apos;s up!</span>
-              <span className="text-neutrals-500 capitalize">Max 1800 characters</span>
+              <span id="contact-form-message-hint" className="text-neutrals-400 capitalize">Max 1800 characters</span>
             </Label>
             <Textarea
               id="contact-form-message"
+              name="message"
+              aria-describedby="contact-form-message-hint"
+              required
+              maxLength={1800}
               placeholder="Tell us about your project..."
             />
           </div>
@@ -67,8 +70,8 @@ function ContactForm() {
             <button
               type="button"
               onClick={handleEmailClick}
-              className="text-neutrals-300 hover:text-neutrals-50 focus-visible:text-neutrals-50 inline-flex items-center transition-colors cursor-pointer"
-              title="Hit us up"
+              className="text-neutrals-300 hover:text-neutrals-50 focus-visible:text-neutrals-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary inline-flex min-h-11 items-center transition-colors cursor-pointer"
+              title={`Email us at ${siteConfig.email}`}
             >
               <Icons.Envelope
                 aria-hidden="true"
@@ -89,7 +92,6 @@ function ContactForm() {
           </div>
         </fieldset>
       </form>
-    </>
   );
 }
 

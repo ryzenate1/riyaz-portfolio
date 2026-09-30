@@ -28,15 +28,64 @@ export const viewport: Viewport = {
   ],
 };
 
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': 'https://ryzenstudio.com/#person',
+      name: 'Riyaz Akthar',
+      alternateName: ['Riyaz', 'RYZEN'],
+      url: 'https://ryzenstudio.com/pro',
+      jobTitle: 'Full-Stack Developer',
+      description:
+        'Riyaz Akthar is a Full-Stack Developer and Mechanical Engineering student at BSA Crescent Institute of Science & Technology, Chennai.',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Chennai',
+        addressRegion: 'Tamil Nadu',
+        addressCountry: 'IN',
+      },
+      alumniOf: {
+        '@type': 'CollegeOrUniversity',
+        name: 'BSA Crescent Institute of Science & Technology',
+      },
+      knowsAbout: [
+        'Web Development',
+        'Next.js',
+        'React',
+        'UI/UX Design',
+        'Cloud Computing',
+        'Distributed Systems',
+        'Developer Tools',
+        'Artificial Intelligence',
+        'Virtualization',
+      ],
+      sameAs: [
+        'https://www.linkedin.com/in/riyazakthar',
+        'https://github.com/ryzenate1',
+        'https://instagram.com/ryzenvfx',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://ryzenstudio.com/#website',
+      url: 'https://ryzenstudio.com/',
+      name: 'RYZEN STUDIO',
+      publisher: { '@id': 'https://ryzenstudio.com/#person' },
+    },
+  ],
+};
+
 export const metadata: Metadata = {
   title: {
-    default: "RYZEN STUDIO - Web Design & Development",
+    default: "Riyaz Akthar — Full-Stack Developer | RYZEN STUDIO",
     template: "%s | RYZEN STUDIO",
   },
-  description: "Professional Web Design & Development by Riyaz. Creating modern, performant, and visually stunning digital experiences.",
-  keywords: ["web development", "web design", "portfolio", "riyaz", "ryzen studio", "full-stack developer"],
-  authors: [{ name: "Riyaz", url: "https://ryzenstudio.com" }],
-  creator: "Riyaz",
+  description: "Riyaz Akthar is a Full-Stack Developer and Mechanical Engineering student at BSA Crescent Institute of Science & Technology, Chennai. Explore demo UI/UX projects, interactive games, and creative experiments.",
+  keywords: ["Riyaz Akthar", "Riyaz", "RYZEN STUDIO", "Full-Stack Developer Chennai", "Mechanical Engineering BSA Crescent", "Next.js developer", "React developer", "UI UX designer", "web development portfolio", "ryzenvfx"],
+  authors: [{ name: "Riyaz Akthar", url: "https://www.linkedin.com/in/riyazakthar" }],
+  creator: "Riyaz Akthar",
   publisher: "RYZEN STUDIO",
   robots: {
     index: true,
@@ -54,14 +103,25 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://ryzenstudio.com",
     siteName: "RYZEN STUDIO",
-    title: "RYZEN STUDIO - Web Design & Development",
-    description: "Professional Web Design & Development by Riyaz",
+    title: "Riyaz Akthar — Full-Stack Developer | RYZEN STUDIO",
+    description: "Full-Stack Developer and Mechanical Engineering student in Chennai. Demo UI/UX projects, games, and experiments.",
+    images: [
+      {
+        url: "/images/riyaz-profile.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Riyaz Akthar - Full-Stack Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "RYZEN STUDIO",
-    description: "Professional Web Design & Development by Riyaz",
-    creator: "@ryzenstudio",
+    title: "Riyaz Akthar — Full-Stack Developer | RYZEN STUDIO",
+    description: "Full-Stack Developer and Mechanical Engineering student in Chennai. Demo UI/UX projects, games, and experiments.",
+    images: ["/images/riyaz-profile.jpg"],
+  },
+  alternates: {
+    canonical: "https://ryzenstudio.com",
   },
   metadataBase: new URL("https://ryzenstudio.com"),
 };
@@ -84,6 +144,10 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${italianno.variable} antialiased font-sans`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <ContentProtection>
           {children}
         </ContentProtection>

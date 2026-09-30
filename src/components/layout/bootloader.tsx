@@ -159,9 +159,21 @@ const BootloaderSequence: React.FC<BootloaderProps> = ({ onBootComplete }) => {
   }, [currentCharIndex, currentLineIndex, bootSequence, onBootComplete]);
 
   return (
-    <div className="fixed inset-0 bg-black text-green-400 font-mono text-lg md:text-xl p-6 overflow-hidden select-none flex flex-col items-start justify-start z-[9999]">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Terminal boot sequence. Press Escape to skip."
+      className="fixed inset-0 bg-black text-green-400 font-mono text-lg md:text-xl p-6 overflow-hidden select-none flex flex-col items-start justify-start z-[9999]"
+    >
+      <button
+        type="button"
+        onClick={onBootComplete}
+        className="absolute top-4 right-4 z-10 rounded-md border border-green-400/40 px-4 py-2 min-h-11 text-sm text-green-400 hover:bg-green-400/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400 transition-colors"
+      >
+        Skip intro (Esc)
+      </button>
       {!cleared ? (
-        <div className="whitespace-pre-wrap leading-tight w-full">
+        <div className="whitespace-pre-wrap leading-tight w-full" aria-hidden="true">
           {displayLines.map((line, idx) => (
             <div
               key={idx}
@@ -244,12 +256,19 @@ const getInitialBootloaderState = (): { shouldShow: boolean; showPrompt: boolean
 };
 
 function Bootloader() {
-  // Use lazy initialization to avoid setState in useEffect
+  // Use lazy initialization to avoid setState in useEffect.
+  // Users who prefer reduced motion never see the boot animation.
   const [shouldShowBootloader, setShouldShowBootloader] = useState(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return false;
+    }
     const state = getInitialBootloaderState();
     return state.shouldShow;
   });
   const [isBootloaderActive, setIsBootloaderActive] = useState(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return false;
+    }
     const state = getInitialBootloaderState();
     return state.shouldShow;
   });
@@ -322,6 +341,10 @@ function Bootloader() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.3 }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="bootloader-prompt-title"
+          aria-describedby="bootloader-prompt-description"
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
         >
           <motion.div
@@ -330,23 +353,23 @@ function Bootloader() {
             className="bg-neutrals-800 border border-neutrals-600 rounded-lg p-6 max-w-md mx-4 text-center"
           >
             <div className="mb-4">
-              <h3 className="text-xl font-bold text-neutrals-50 mb-2">
-                🚀 Terminal Access
+              <h3 id="bootloader-prompt-title" className="text-xl font-bold text-neutrals-50 mb-2">
+                Terminal Access
               </h3>
-              <p className="text-neutrals-300 text-sm">
+              <p id="bootloader-prompt-description" className="text-neutrals-300 text-sm">
                 I noticed you refreshed a few times. Want to see the bootloader sequence again?
               </p>
             </div>
             <div className="flex gap-3 justify-center">
               <button
                 onClick={handlePromptYes}
-                className="px-4 py-2 bg-primary hover:bg-primary/80 text-white rounded-md transition-colors font-medium"
+                className="px-4 py-2 min-h-11 bg-primary hover:bg-primary/80 text-white rounded-md transition-colors font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
-                Yes, show me! 🎯
+                Yes, show me!
               </button>
               <button
                 onClick={handlePromptNo}
-                className="px-4 py-2 bg-neutrals-700 hover:bg-neutrals-600 text-neutrals-200 rounded-md transition-colors"
+                className="px-4 py-2 min-h-11 bg-neutrals-700 hover:bg-neutrals-600 text-neutrals-200 rounded-md transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 No thanks
               </button>

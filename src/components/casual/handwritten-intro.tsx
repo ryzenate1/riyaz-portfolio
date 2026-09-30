@@ -22,8 +22,9 @@ export function HandwrittenIntro() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Waving hand emoji */}
+      {/* Waving hand emoji (decorative) */}
       <motion.span
+        aria-hidden="true"
         className="text-4xl sm:text-5xl inline-block"
         animate={{ 
           rotate: [0, 14, -8, 14, -4, 10, 0],
@@ -54,6 +55,7 @@ export function HandwrittenIntro() {
         
         {/* Handwritten SVG underline */}
         <motion.svg
+          aria-hidden="true"
           className="absolute -bottom-1 left-0 w-full"
           height="12"
           viewBox="0 0 200 12"
@@ -100,6 +102,7 @@ export function HandwrittenIntroStyled() {
         
         {/* Handwritten SVG underline that draws in */}
         <motion.svg
+          aria-hidden="true"
           className="absolute -bottom-1 left-0 w-full"
           height="12"
           viewBox="0 0 200 12"
@@ -119,8 +122,9 @@ export function HandwrittenIntroStyled() {
         </motion.svg>
       </div>
 
-      {/* Waving hand with animation - after Riyaz */}
+      {/* Waving hand with animation - after Riyaz (decorative) */}
       <motion.span
+        aria-hidden="true"
         className="text-4xl sm:text-5xl inline-block"
         animate={{ 
           rotate: [0, 14, -8, 14, -4, 10, 0],

@@ -81,9 +81,9 @@ Fetching profile...
 
 Initializing Riyaz Portfolio...
 
-Hey there! I'm a 17-year-old passionate coder who's absolutely obsessed with exploring new things and questioning everything around me. Why? Because that's how you truly learn!
+Hey there! I'm an 18-year-old passionate coder who's absolutely obsessed with exploring new things and questioning everything around me. Why? Because that's how you truly learn!
 
-"Jack of all trades, master of none" - that's my motto and I wear it proudly. I dive deep into Android development, web development, cloud architecture, system administration, networking, nutrition, server management, PC building, content creation, teaching, inventing new stuff, kinesiology, and biomechanics. 
+"Jack of all trades, master of none" - that's my motto and I wear it proudly. I dive deep into Android development, web development, cloud architecture, system administration, networking, nutrition, server management, PC building, content creation, teaching, and inventing new stuff. 
 
 I'm a free learner - I learn what I want to learn, do what I love, and I'm genuinely good at what I do. Haven't mastered everything yet, but that's the beauty of the journey, right?
 

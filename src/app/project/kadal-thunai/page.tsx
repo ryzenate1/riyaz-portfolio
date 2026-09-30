@@ -18,7 +18,7 @@ export default function KadalThunaiProject() {
         {/* Hero */}
         <section className="pt-32 pb-16">
           <Container>
-            <Link href="/#work" className="text-sm text-neutrals-500 hover:text-neutrals-300 transition-colors">
+            <Link href="/pro#work" className="text-sm text-neutrals-500 hover:text-neutrals-300 transition-colors">
               ← Back to work
             </Link>
             

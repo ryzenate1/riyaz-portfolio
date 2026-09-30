@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion, useMotionValue, useTransform, AnimatePresence, type PanInfo } from 'framer-motion';
+import { motion, useMotionValue, useTransform, AnimatePresence, useReducedMotion, type PanInfo } from 'framer-motion';
 import { Fish, Bus, Ticket, ArrowRight, LucideIcon, X } from 'lucide-react';
 
 // ============================================================================
@@ -189,29 +189,34 @@ function SwipeCard({
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-15, 15]);
   const opacity = useTransform(x, [-200, -100, 0, 100, 200], [0.5, 1, 1, 1, 0.5]);
+  const shouldReduceMotion = useReducedMotion();
   
   // Pre-compute transforms at top level to avoid conditional hook calls
   const skipOpacity = useTransform(x, [-100, 0], [1, 0]);
   const viewOpacity = useTransform(x, [0, 100], [0, 1]);
 
+  const SWIPE_OFFSET_THRESHOLD = 60;
+  const SWIPE_VELOCITY_THRESHOLD = 400;
+
   const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    if (info.offset.x > 100) onSwipe('right');
-    else if (info.offset.x < -100) onSwipe('left');
+    if (info.offset.x > SWIPE_OFFSET_THRESHOLD || info.velocity.x > SWIPE_VELOCITY_THRESHOLD) onSwipe('right');
+    else if (info.offset.x < -SWIPE_OFFSET_THRESHOLD || info.velocity.x < -SWIPE_VELOCITY_THRESHOLD) onSwipe('left');
   };
 
   return (
     <motion.div
-      className="absolute inset-0 cursor-grab active:cursor-grabbing touch-none"
+      className="absolute inset-0 cursor-grab active:cursor-grabbing touch-pan-y"
       style={{ x, rotate, opacity }}
       drag={isTop ? 'x' : false}
       dragConstraints={{ left: 0, right: 0 }}
       dragElastic={0.7}
+      dragMomentum={false}
       onDragEnd={handleDragEnd}
       initial={{ scale: 0.95, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       exit={{ x: x.get() > 0 ? 300 : -300, opacity: 0, transition: { duration: 0.3 } }}
     >
-      <div className={`relative h-full rounded-3xl overflow-hidden border border-neutrals-800/80 backdrop-blur-xl bg-gradient-to-br ${project.gradient} bg-neutrals-900/90`}>
+      <div className={`relative h-full rounded-3xl overflow-hidden border border-neutrals-800/80 bg-neutrals-900 bg-gradient-to-br ${project.gradient}`}>
         {/* Glassmorphism overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutrals-950/95" />
         
@@ -224,10 +229,11 @@ function SwipeCard({
         {/* Icon */}
         <motion.div 
           className="absolute top-8 left-1/2 -translate-x-1/2 w-20 h-20 rounded-2xl bg-neutrals-800/50 backdrop-blur flex items-center justify-center border border-neutrals-700/30"
-          animate={{ y: [0, -8, 0] }}
+          aria-hidden="true"
+          animate={shouldReduceMotion ? undefined : { y: [0, -8, 0] }}
           transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
         >
-          <project.icon className="w-10 h-10 text-primary opacity-60" />
+          <project.icon className="w-10 h-10 text-primary opacity-60" aria-hidden="true" />
         </motion.div>
 
         {/* Content */}
@@ -251,23 +257,26 @@ function SwipeCard({
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={(e) => { e.stopPropagation(); onViewDetails(); }}
-            className="w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-neutrals-200 font-medium transition-all flex items-center justify-center gap-2"
+            aria-label={`View details for ${project.title}`}
+            className="w-full py-3 min-h-11 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-neutrals-200 font-medium transition-all flex items-center justify-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <span>View Details</span>
-            <span className="text-lg">→</span>
+            <span aria-hidden="true" className="text-lg">→</span>
           </motion.button>
         </div>
 
-        {/* Swipe indicators */}
+        {/* Swipe indicators (decorative) */}
         {isTop && (
           <>
             <motion.div
+              aria-hidden="true"
               className="absolute top-6 left-6 px-3 py-1.5 rounded-lg border border-neutrals-600 text-neutrals-500 text-xs font-medium uppercase tracking-wider -rotate-12"
               style={{ opacity: skipOpacity }}
             >
               Skip
             </motion.div>
             <motion.div
+              aria-hidden="true"
               className="absolute top-6 right-6 px-3 py-1.5 rounded-lg border border-primary text-primary text-xs font-medium uppercase tracking-wider rotate-12"
               style={{ opacity: viewOpacity }}
             >
@@ -302,7 +311,7 @@ export function ProjectCards() {
   const nextProject = projects[(currentIndex + 1) % projects.length];
 
   return (
-    <div className="w-full max-w-sm mx-auto">
+    <div className="w-full max-w-sm mx-auto" role="region" aria-roledescription="carousel" aria-label="Featured projects">
       {/* Card Stack */}
       <div className="relative h-[480px] sm:h-[520px]">
         <AnimatePresence mode="popLayout">
@@ -314,7 +323,7 @@ export function ProjectCards() {
             animate={{ scale: 0.95, y: 10 }}
             style={{ zIndex: 0 }}
           >
-            <div className={`h-full rounded-3xl bg-gradient-to-br ${nextProject.gradient} bg-neutrals-900/50 border border-neutrals-800/50 opacity-50`} />
+            <div className="h-full rounded-3xl bg-neutrals-900 border border-neutrals-800/50 opacity-60" />
           </motion.div>
 
           {/* Current card */}
@@ -329,38 +338,54 @@ export function ProjectCards() {
       </div>
 
       {/* Controls */}
-      <div className="flex justify-center items-center gap-6 mt-8">
+      <div className="flex justify-center items-center gap-4 mt-8">
         <button
+          type="button"
           onClick={() => handleSwipe()}
-          className="w-12 h-12 rounded-full border border-neutrals-700 flex items-center justify-center text-neutrals-500 hover:text-neutrals-300 hover:border-neutrals-600 transition-all"
+          aria-label="Show next project"
+          className="w-12 h-12 min-h-11 min-w-11 rounded-full border border-neutrals-700 flex items-center justify-center text-neutrals-500 hover:text-neutrals-300 hover:border-neutrals-600 transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
-          <X className="w-5 h-5" />
+          <X className="w-5 h-5" aria-hidden="true" />
         </button>
 
         {/* Dots */}
-        <div className="flex gap-2">
-          {projects.map((_, i) => (
+        <div className="flex gap-1" role="tablist" aria-label="Choose project">
+          {projects.map((project, i) => (
             <button
-              key={i}
+              key={project.id}
+              type="button"
+              role="tab"
+              aria-selected={i === currentIndex}
               onClick={() => setCurrentIndex(i)}
-              className={`h-2 rounded-full transition-all ${
-                i === currentIndex ? 'w-6 bg-primary' : 'w-2 bg-neutrals-700 hover:bg-neutrals-600'
-              }`}
-            />
+              aria-label={`Show ${project.title}`}
+              className="flex min-h-11 min-w-11 items-center justify-center p-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <span
+                aria-hidden="true"
+                className={`h-2 rounded-full transition-all ${
+                  i === currentIndex ? 'w-6 bg-primary' : 'w-2 bg-neutrals-700 hover:bg-neutrals-600'
+                }`}
+              />
+            </button>
           ))}
         </div>
 
         <button
+          type="button"
           onClick={() => handleViewDetails(currentProject.slug)}
-          className="w-12 h-12 rounded-full border border-primary/50 flex items-center justify-center text-primary hover:bg-primary/10 transition-all"
+          aria-label={`View details for ${currentProject.title}`}
+          className="w-12 h-12 min-h-11 min-w-11 rounded-full border border-primary/50 flex items-center justify-center text-primary hover:bg-primary/10 transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
-          <ArrowRight className="w-5 h-5" />
+          <ArrowRight className="w-5 h-5" aria-hidden="true" />
         </button>
       </div>
 
       {/* Hint */}
-      <p className="text-center text-neutrals-600 text-xs mt-5">
-        Swipe or tap → for details
+      <p className="text-center text-neutrals-400 text-xs mt-5">
+        Swipe or tap arrow for details
+      </p>
+      <p role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+        Project {currentIndex + 1} of {projects.length}: {currentProject.title}
       </p>
     </div>
   );

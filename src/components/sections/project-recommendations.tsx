@@ -36,7 +36,7 @@ export default async function ProjectRecommendationsSection({ project }: Props) 
             ))}
           </div>
           <Link
-            href="/#work"
+            href="/pro#work"
             className="group hover:text-primary focus-visible:text-primary mt-8 inline-flex items-center justify-center text-lg transition-colors duration-300"
           >
             <Icons.ArrowLongLeft

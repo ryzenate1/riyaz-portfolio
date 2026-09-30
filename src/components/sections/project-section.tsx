@@ -30,6 +30,8 @@ export default function ProjectSection({ section, previousSectionType, nextSecti
           {/* eslint-disable-next-line @next/next/no-img-element -- Sanity CDN provides optimized images */}
           <img
             alt={section.image.alt}
+            loading="lazy"
+            decoding="async"
             className={cn('rounded-lg lg:w-1/2', section.imagePosition === 'right' && 'order-1')}
             style={{
               backgroundColor: section.image.asset.metadata.palette.dominant.background,
@@ -48,6 +50,8 @@ export default function ProjectSection({ section, previousSectionType, nextSecti
           {/* eslint-disable-next-line @next/next/no-img-element -- Sanity CDN provides optimized images */}
           <img
             alt={image.alt}
+            loading="lazy"
+            decoding="async"
             className={cn(
               'w-full rounded-lg',
               previousSectionType === 'image' && 'rounded-t-none',
@@ -76,6 +80,8 @@ export default function ProjectSection({ section, previousSectionType, nextSecti
                     {/* eslint-disable-next-line @next/next/no-img-element -- Sanity CDN provides optimized images */}
                     <img
                       alt={(testimonial.logo ?? testimonial.avatar).alt}
+                      loading="lazy"
+                      decoding="async"
                       className="size-full"
                       style={{
                         backgroundColor: (testimonial.logo ?? testimonial.avatar).asset.metadata
@@ -95,6 +101,8 @@ export default function ProjectSection({ section, previousSectionType, nextSecti
                       {/* eslint-disable-next-line @next/next/no-img-element -- Sanity CDN provides optimized images */}
                       <img
                         alt={testimonial.avatar.alt}
+                        loading="lazy"
+                        decoding="async"
                         className="size-full"
                         style={{
                           backgroundColor:

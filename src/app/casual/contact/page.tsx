@@ -24,15 +24,15 @@ const contactMethods = [
   {
     icon: Instagram,
     name: 'Instagram',
-    value: '@ryzenate',
-    href: 'https://instagram.com/ryzenate',
+    value: '@ryzenvfx',
+    href: 'https://instagram.com/ryzenvfx',
     color: 'hover:bg-pink-50',
   },
   {
     icon: Mail,
     name: 'Email',
-    value: 'hello@ryzen.studio',
-    href: 'mailto:hello@ryzen.studio',
+    value: 'riyazakthar46@gmail.com',
+    href: 'https://mail.google.com/mail/?view=cm&fs=1&to=riyazakthar46@gmail.com',
     color: 'hover:bg-blue-50',
   },
 ];
@@ -59,7 +59,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="casual-theme">
+    <main id="main-content" className="casual-theme">
       {/* Hero */}
       <section className="casual-section">
         <div className="casual-container">
@@ -214,6 +214,6 @@ export default function ContactPage() {
           </motion.div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

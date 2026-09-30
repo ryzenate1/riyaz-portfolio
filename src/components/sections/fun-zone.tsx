@@ -122,9 +122,17 @@ export default function FunZoneSection() {
               <div className="space-y-4">
                 <h2 className="text-5xl/tight font-bold text-balance md:text-7xl/tight text-primary">
                   {resultType === 'same' ? (
-                    <span dangerouslySetInnerHTML={{ __html: finalMessages.same[currentChoice] + "<br>btw you are as silly as me... 🤪" }} />
+                    <span>
+                      {finalMessages.same[currentChoice]}
+                      <br />
+                      btw you are as silly as me... 🤪
+                    </span>
                   ) : (
-                    <span dangerouslySetInnerHTML={{ __html: finalMessages.different(previousChoice === 'boy' ? 'boy' : 'girl') + "<br>Huhh suspicious... 😏" }} />
+                    <span>
+                      {finalMessages.different(previousChoice === 'boy' ? 'boy' : 'girl')}
+                      <br />
+                      Huhh suspicious... 😏
+                    </span>
                   )}
                 </h2>
                 <p className="text-neutrals-300 text-xl max-w-3xl mx-auto leading-relaxed">

@@ -108,7 +108,7 @@ export default function TypingGame() {
   const progress = Math.round((userInput.length / text.length) * 100);
 
   return (
-    <main className="min-h-screen py-32">
+    <main className="min-h-screen bg-neutrals-900 text-neutrals-50 py-32">
       <Container>
         {/* Header */}
         <div className="max-w-2xl mx-auto mb-12">

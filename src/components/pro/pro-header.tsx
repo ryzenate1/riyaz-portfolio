@@ -19,15 +19,11 @@ const links = [
     href: '/pro#work',
   },
   {
-    label: 'Services',
-    href: '/pro#services',
-  },
-  {
     label: 'Games',
     href: '/pro/games',
   },
   {
-    label: '👋 Casual Side',
+    label: 'Casual Side',
     href: '/casual',
   },
 ] as const;
@@ -54,6 +50,8 @@ export function ProHeader() {
         {isNavigating && (
           <motion.div
             className="fixed inset-0 z-[9999] bg-[#d4af37] flex flex-col items-center justify-center"
+            role="status"
+            aria-label="Switching to Casual Mode"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -89,8 +87,8 @@ export function ProHeader() {
               Loading the personal side... 👋
             </motion.p>
 
-            {/* Animated dots */}
-            <motion.div className="flex gap-2 mt-6">
+            {/* Animated dots (decorative) */}
+            <motion.div aria-hidden="true" className="flex gap-2 mt-6">
               {[0, 1, 2].map((i) => (
                 <motion.div
                   key={i}
@@ -112,7 +110,6 @@ export function ProHeader() {
       </AnimatePresence>
 
     <header
-      aria-label="Primary"
       className="fixed top-0 z-40 w-full"
     >
       <Container>
@@ -194,6 +191,7 @@ export function ProHeader() {
                 
                 {/* Casual side icon - sun */}
                 <motion.div
+                  aria-hidden="true"
                   className="absolute left-[8px] text-sm z-10"
                   animate={{ 
                     opacity: isToggleHovered ? 1 : 0.3,
@@ -206,6 +204,7 @@ export function ProHeader() {
                 
                 {/* Pro side icon - moon */}
                 <motion.div
+                  aria-hidden="true"
                   className="absolute right-[8px] text-sm z-10"
                   animate={{ 
                     opacity: isToggleHovered ? 0.2 : 1,

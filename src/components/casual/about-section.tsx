@@ -12,13 +12,7 @@ import {
   ChefHat, 
   Zap, 
   ArrowRight,
-  Sparkles,
-  Target,
-  Flame,
-  Heart,
-  Trophy,
-  Lightbulb,
-  AlertCircle
+  Sparkles
 } from 'lucide-react';
 
 // ==================== ANIMATION HELPERS ====================
@@ -58,8 +52,8 @@ export function AboutSection() {
       
       {/* ==================== INTRO - BOLD STATEMENT ==================== */}
       <section className="min-h-[80vh] flex items-center relative overflow-hidden">
-        {/* Subtle background lines */}
-        <div className="absolute inset-0 opacity-[0.03]">
+        {/* Subtle background lines (decorative) */}
+        <div className="absolute inset-0 opacity-[0.03]" aria-hidden="true">
           {[...Array(20)].map((_, i) => (
             <div 
               key={i} 
@@ -76,7 +70,7 @@ export function AboutSection() {
             </p>
           </Reveal>
           
-          <h1 className="mb-12">
+          <h2 className="mb-12">
             <Reveal delay={0.1}>
               <span 
                 className="block text-5xl md:text-7xl lg:text-[5.5rem] font-black text-[#1a1a2e] leading-[1.05]"
@@ -90,7 +84,7 @@ export function AboutSection() {
                 className="block text-5xl md:text-7xl lg:text-[5.5rem] font-black text-[#1a1a2e]/20 leading-[1.05]"
                 style={{ fontFamily: "'Mosk', sans-serif" }}
               >
-                17 years old.
+                18 years old.
               </span>
             </Reveal>
             <Reveal delay={0.3}>
@@ -102,21 +96,12 @@ export function AboutSection() {
                 <span className="text-[#1a1a2e]"> about everything.</span>
               </span>
             </Reveal>
-          </h1>
+          </h2>
 
           <Reveal delay={0.4}>
             <p className="text-xl md:text-2xl text-[#555] max-w-2xl leading-relaxed">
-              A high schooler from St. Joseph&apos;s studying Computer Science, 
-              running on curiosity and caffeine. An ex-
-              <a 
-                href="https://www.trustchildren.org/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-[#d4af37] hover:underline"
-              >
-                Gurukulam
-              </a>{' '}
-              student.
+              A first-year Mechanical Engineering student at BSA Crescent Institute of Science &amp; Technology, 
+              running on curiosity and caffeine.
             </p>
           </Reveal>
 
@@ -148,7 +133,7 @@ export function AboutSection() {
           <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
             {/* Image Side */}
             <Reveal className="relative">
-              <div className="relative -mt-28 md:-mt-44">
+              <div className="relative -mt-16 md:-mt-44">
                 {/* Decorative frame */}
                 <div className="absolute -inset-4 md:-inset-6 border-2 border-[#d4af37]/30 -rotate-3" />
                 <div className="absolute -inset-4 md:-inset-6 border-2 border-[#1a1a2e]/10 rotate-2" />
@@ -161,7 +146,6 @@ export function AboutSection() {
                     fill
                     className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    priority
                   />
                   
                   {/* Overlay gradient */}
@@ -206,7 +190,7 @@ export function AboutSection() {
               
               <Reveal delay={0.3}>
                 <p className="text-lg md:text-xl text-[#555] leading-relaxed mb-8">
-                  A 17-year-old from Chennai who codes, lifts, and questions everything. 
+                  An 18-year-old from Chennai who codes, lifts, and questions everything. 
                   This portfolio is my digital home — raw, real, and always evolving.
                 </p>
               </Reveal>
@@ -223,36 +207,6 @@ export function AboutSection() {
               </Reveal>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ==================== THE CHAOS ==================== */}
-      <section className="py-32 bg-[#1a1a2e] text-white relative">
-        <div className="max-w-4xl mx-auto px-6 md:px-12">
-          <Reveal>
-            <p className="text-[#d4af37] font-medium uppercase tracking-[0.3em] text-sm mb-6">
-              The Beautiful Mess
-            </p>
-          </Reveal>
-          
-          <Reveal delay={0.1}>
-            <p className="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-white/90 mb-12">
-              My brain doesn&apos;t know how to rest. I&apos;m either studying fitness, 
-              learning cloud systems, editing videos, cooking something random, 
-              or thinking about why the world works the way it does.
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.2}>
-            <div className="border-l-2 border-[#d4af37] pl-8 py-4">
-              <p 
-                className="text-3xl md:text-4xl text-[#d4af37] font-bold"
-                style={{ fontFamily: "'Caveat', cursive" }}
-              >
-                &ldquo;My life sounds like a mess, but it&apos;s a beautiful mess.&rdquo;
-              </p>
-            </div>
-          </Reveal>
         </div>
       </section>
 
@@ -281,7 +235,7 @@ export function AboutSection() {
               { 
                 icon: Dumbbell, 
                 title: 'Fitness Science',
-                desc: 'Kinesiology, biomechanics, nutrition. I study muscles like I study code. Training to failure, tracking everything, always pushing.'
+                desc: 'Training, nutrition, and recovery as a discipline. I track what I lift, what I eat, and how I progress — consistency over intensity.'
               },
               { 
                 icon: Code2, 
@@ -357,7 +311,7 @@ export function AboutSection() {
               { 
                 phase: '04',
                 title: 'The Gym Became a Classroom',
-                text: 'Fitness hit different. Heavy sets, partials, stretch-focused movements. Recovery was bad, nutrition inconsistent, but I studied anatomy and biomechanics like my life depended on it.'
+                text: 'Fitness hit different. Heavy sets, partials, stretch-focused movements. Recovery was bad, nutrition inconsistent, but I studied the process like my life depended on it.'
               },
               { 
                 phase: '05',
@@ -381,196 +335,52 @@ export function AboutSection() {
         </div>
       </section>
 
-      {/* ==================== CURIOSITY - THE DRIVING FORCE ==================== */}
-      <section className="py-32 bg-[#1a1a2e] overflow-hidden">
-        <div className="max-w-5xl mx-auto px-6 md:px-12">
-          <Reveal>
-            <p className="text-[#d4af37] font-medium uppercase tracking-[0.3em] text-sm mb-4">
-              The Driving Force
-            </p>
-            <h2 
-              className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-16"
-              style={{ fontFamily: "'Mosk', sans-serif" }}
-            >
-              Curiosity.
-            </h2>
-          </Reveal>
-
-          {/* Rhythmic list */}
-          <div className="space-y-6 mb-16">
-            {[
-              'Curiosity is the reason I know cloud engineering at 17.',
-              'Curiosity is the reason I understand muscles, tendons, force, and biomechanics.',
-              'Curiosity is the reason I improved my physique despite low ferritin and insane training.',
-              'Curiosity is the reason I built servers, ran a company, and learned networking.',
-              'Curiosity is the reason I learned cooking, video editing, and camera science.',
-              'Curiosity is the reason I\'ve changed my dream twenty times — but kept moving.',
-            ].map((line, index) => (
-              <Reveal key={index} delay={index * 0.08}>
-                <p className="text-xl md:text-2xl text-white/80 leading-relaxed pl-6 border-l-2 border-[#d4af37]/50 hover:border-[#d4af37] hover:text-white transition-all duration-300">
-                  {line}
-                </p>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.5}>
-            <div className="border-t border-white/10 pt-12">
-              <p className="text-xl md:text-2xl text-white/60 leading-relaxed mb-4">
-                If someone asks me why I became like this, I genuinely don&apos;t know.
-              </p>
-              <p className="text-2xl md:text-3xl text-[#d4af37] font-bold">
-                All I know is that once I start learning something, I don&apos;t stop until I feel like I own it.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ==================== THE STRUGGLE ==================== */}
-      <section className="py-32 bg-white">
+      {/* ==================== BEYOND CODE ==================== */}
+      <section className="py-32 bg-[#faf8f5]">
         <div className="max-w-4xl mx-auto px-6 md:px-12">
           <Reveal>
             <p className="text-[#d4af37] font-medium uppercase tracking-[0.3em] text-sm mb-4">
-              The Reality
+              My Current Life
             </p>
-            <h2 
-              className="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e] mb-16"
-              style={{ fontFamily: "'Mosk', sans-serif" }}
-            >
-              Being me feels like...
-            </h2>
-          </Reveal>
-
-          <div className="space-y-8 mb-16">
-            {[
-              { text: 'Low ferritin. Still pushing through tough sessions.', icon: Flame },
-              { text: 'Perfectionist. But also chaotic.', icon: Zap },
-              { text: 'Want to master everything. Time slaps me every day.', icon: Target },
-              { text: 'Try to stay consistent. Life keeps throwing problems.', icon: AlertCircle },
-              { text: 'Burnt out, confused, overwhelmed — but I don\'t stop.', icon: Heart },
-            ].map(({ text, icon: Icon }, index) => (
-              <Reveal key={index} delay={index * 0.1}>
-                <div className="flex items-center gap-6 group">
-                  <div className="w-12 h-12 flex items-center justify-center border-2 border-[#1a1a2e]/20 group-hover:border-[#d4af37] group-hover:bg-[#d4af37] transition-all duration-300">
-                    <Icon size={20} className="text-[#1a1a2e]/40 group-hover:text-white transition-colors" />
-                  </div>
-                  <p className="text-xl md:text-2xl text-[#1a1a2e]/80 group-hover:text-[#1a1a2e] transition-colors">
-                    {text}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.6}>
-            <div className="bg-[#faf8f5] p-8 md:p-12 border-l-4 border-[#d4af37]">
-              <p className="text-2xl md:text-3xl text-[#1a1a2e] font-medium leading-relaxed">
-                Every mistake shaped me. Every failure taught me something I&apos;ll use forever.
-                <span className="text-[#d4af37]"> I don&apos;t hide my past because it literally built the person I am today.</span>
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ==================== THE FUTURE ==================== */}
-      <section className="py-32 bg-[#1a1a2e] relative overflow-hidden">
-        {/* Subtle grid background */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="h-full w-full" style={{ 
-            backgroundImage: 'linear-gradient(#d4af37 1px, transparent 1px), linear-gradient(90deg, #d4af37 1px, transparent 1px)',
-            backgroundSize: '50px 50px'
-          }} />
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12">
-          <Reveal>
-            <p className="text-[#d4af37] font-medium uppercase tracking-[0.3em] text-sm mb-4">
-              What&apos;s Next
-            </p>
-            <h2 
-              className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-16"
-              style={{ fontFamily: "'Mosk', sans-serif" }}
-            >
-              The doors are open.
-            </h2>
-          </Reveal>
-
-          <div className="space-y-12 mb-16">
-            {[
-              { 
-                icon: Code2, 
-                title: 'Developer',
-                text: 'Not just code. Understanding systems from hardware to cloud, end to end.'
-              },
-              { 
-                icon: Trophy, 
-                title: 'Athlete',
-                text: 'Not just training. Performing. Competing. Pushing limits that matter.'
-              },
-              { 
-                icon: Camera, 
-                title: 'Creator',
-                text: 'Videos, photos, stories. Building things that make people feel something.'
-              },
-              { 
-                icon: Zap, 
-                title: 'All-Rounder',
-                text: 'Strong, smart, creative, technical, artistic. All of it. No compromises.'
-              },
-            ].map(({ icon: Icon, title, text }, index) => (
-              <Reveal key={title} delay={index * 0.1}>
-                <div className="flex items-start gap-6 group">
-                  <div className="w-14 h-14 flex items-center justify-center bg-[#d4af37] flex-shrink-0">
-                    <Icon size={24} className="text-[#1a1a2e]" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
-                    <p className="text-lg text-white/60">{text}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.5}>
-            <div className="border-t border-white/10 pt-12 text-center">
-              <p className="text-xl text-white/60 mb-4">
-                I don&apos;t know where life will take me, but I&apos;m ready for all of it.
-              </p>
-              <p 
-                className="text-3xl md:text-4xl text-[#d4af37] font-bold"
-                style={{ fontFamily: "'Caveat', cursive" }}
-              >
-                The doors are wide open, and I&apos;m walking through every single one.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ==================== ADVICE - MINIMAL ==================== */}
-      <section className="py-32 bg-[#d4af37]">
-        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <Reveal>
-            <Lightbulb size={48} className="mx-auto mb-8 text-[#1a1a2e]" />
             <h2 
               className="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1a2e] mb-12"
               style={{ fontFamily: "'Mosk', sans-serif" }}
             >
-              My advice to you.
+              Beyond Code
             </h2>
           </Reveal>
 
-          <Reveal delay={0.1}>
-            <div className="space-y-4 text-xl md:text-2xl text-[#1a1a2e]">
-              <p className="font-bold">Be curious. Ask why. Break stuff. Fix stuff. Learn.</p>
-              <p className="text-[#1a1a2e]/70">Don&apos;t be scared of mistakes.</p>
-              <p className="text-[#1a1a2e]/70">Don&apos;t be scared of failing.</p>
-              <p className="text-[#1a1a2e]/70">Don&apos;t be scared of restarting.</p>
-            </div>
-          </Reveal>
+          <div className="space-y-6 text-lg md:text-xl text-[#555] leading-relaxed">
+            <Reveal delay={0.1}>
+              <p>
+                I&apos;m Riyaz Akthar, a first-year Mechanical Engineering student who somehow ended up spending a lot of my free time building software.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.15}>
+              <p>
+                I&apos;m naturally curious and like understanding how things work — whether that&apos;s a mechanical system, a Linux server, an AI model, or a piece of software running in production. I enjoy taking things apart, experimenting with them, and occasionally breaking them badly enough that I have to learn how to fix them.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.2}>
+              <p>
+                Outside academics and development, I spend time training at the gym, exploring technology, experimenting with AI tools and infrastructure, and learning things simply because they interest me.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.25}>
+              <p>
+                I&apos;m especially interested in cloud computing, distributed systems, developer tools, AI, virtualization, and building products from scratch. I also enjoy turning ideas into real, working projects rather than leaving them as concepts.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.3}>
+              <p>
+                I&apos;m still early in my journey, but that&apos;s probably what I enjoy most about it — there&apos;s a lot left to build, break, learn, and discover.
+              </p>
+            </Reveal>
+          </div>
         </div>
       </section>
 
@@ -597,6 +407,8 @@ export function CasualFooter() {
         {isNavigating && (
           <motion.div
             className="fixed inset-0 z-[9999] bg-[#0f0f1a] flex flex-col items-center justify-center"
+            role="status"
+            aria-label="Switching to Pro Mode"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -677,15 +489,29 @@ export function CasualFooter() {
             
             <div className="flex items-center gap-6 text-sm text-gray-500">
               <a 
-                href="https://instagram.com/ryzenate" 
+                href="https://instagram.com/ryzenvfx" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-[#d4af37] transition-colors"
               >
                 Instagram
               </a>
-              <span className="text-gray-700">GitHub — Soon</span>
-              <span className="text-gray-700">LinkedIn — Soon</span>
+              <a 
+                href="https://github.com/ryzenate1"
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-[#d4af37] transition-colors"
+              >
+                GitHub
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/riyazakthar"
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-[#d4af37] transition-colors"
+              >
+                LinkedIn
+              </a>
             </div>
           </div>
         </div>

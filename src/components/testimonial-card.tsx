@@ -18,6 +18,8 @@ export default function TestimonialCard({ testimonial }: Props) {
               {/* eslint-disable-next-line @next/next/no-img-element -- Sanity CDN provides optimized images */}
               <img
                 alt={(testimonial.logo ?? testimonial.avatar).alt}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full"
                 style={{
                   backgroundColor: (testimonial.logo ?? testimonial.avatar).asset.metadata.palette
@@ -37,6 +39,8 @@ export default function TestimonialCard({ testimonial }: Props) {
                 {/* eslint-disable-next-line @next/next/no-img-element -- Sanity CDN provides optimized images */}
                 <img
                   alt={testimonial.avatar.alt}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full"
                   style={{
                     backgroundColor: testimonial.avatar.asset.metadata.palette.dominant.background,
@@ -53,9 +57,9 @@ export default function TestimonialCard({ testimonial }: Props) {
             )}
           </div>
           <div>
-            <cite>
-              <h3 className="mb-0.5 leading-tight not-italic max-lg:text-sm">{testimonial.name}</h3>
-            </cite>
+            <p className="mb-0.5 leading-tight max-lg:text-sm text-neutrals-50 font-semibold">
+              <cite className="not-italic">{testimonial.name}</cite>
+            </p>
             <p className="text-neutrals-200 text-xs lg:text-sm">{testimonial.title}</p>
           </div>
         </div>

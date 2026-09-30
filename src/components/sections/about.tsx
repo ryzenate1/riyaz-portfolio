@@ -30,8 +30,9 @@ export default function AboutSection() {
       <div className="flex w-full items-center max-lg:flex-col lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,min(11/12*100%/2,48rem))_minmax(0,min(11/12*100%/2,48rem))_minmax(0,1fr)] 2xl:grid-cols-[minmax(0,1fr)_minmax(0,min(80%/2,48rem))_minmax(0,min(80%/2,48rem))_minmax(0,1fr)]">
         <Image
           src={riyazImage}
-          alt="Riyaz, Full-Stack Developer & Kinesiology Enthusiast"
-          className="bg-neutrals-800 h-full max-h-svh object-cover object-center grayscale transition-[filter] duration-500 hover:grayscale-0 lg:col-start-1 lg:col-end-3"
+          alt="Riyaz, Full-Stack Developer"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="bg-neutrals-800 h-full max-h-svh w-full object-cover object-center grayscale transition-[filter] duration-500 hover:grayscale-0 lg:col-start-1 lg:col-end-3"
         />
 
         <div className="w-full py-28 max-lg:mx-auto max-lg:w-11/12 max-lg:max-w-7xl lg:ps-10 xl:ps-20">
@@ -39,7 +40,7 @@ export default function AboutSection() {
           <TypingHeading headings={headings} />
           <Paragraph className="text-2xl sm:text-3xl md:text-3xl leading-relaxed">
             I&apos;m Riyaz, a passionate{' '}
-            <span className="text-neutrals-100">Full-Stack Developer & Kinesiology Enthusiast</span>{' '}
+            <span className="text-neutrals-100">Full-Stack Developer</span>{' '}
             who loves creating exceptional digital experiences. I specialize in transforming ideas
             into modern, future-ready web applications with a focus on both technical excellence and
             user experience. Let&apos;s build something amazing together!

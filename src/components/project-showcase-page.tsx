@@ -1192,11 +1192,11 @@ export function ProjectShowcasePage({ slug }: { slug: string }) {
   }
 
   return (
-    <main className="min-h-screen pt-24 pb-16">
+    <main className="min-h-screen bg-neutrals-900 text-neutrals-50 pt-24 pb-16">
       <Container>
         {/* Back Button */}
         <Link
-          href="/#work"
+          href="/pro#work"
           className="inline-flex items-center gap-2 text-sm text-neutrals-400 hover:text-white transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" /> Back to projects
@@ -1421,25 +1421,23 @@ export function ProjectShowcasePage({ slug }: { slug: string }) {
           transition={{ delay: 0.6 }}
           className="flex gap-4 mt-12 pt-8 border-t border-neutrals-800"
         >
-          <motion.a
-            href="#"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-neutrals-800/60 border border-neutrals-700/50 text-neutrals-200 hover:border-neutrals-600 transition-colors backdrop-blur"
+          <span
+            aria-disabled="true"
+            title="Source code link coming soon"
+            className="flex items-center gap-2 px-6 py-3 min-h-11 rounded-xl bg-neutrals-800/60 border border-neutrals-700/50 text-neutrals-400 backdrop-blur cursor-not-allowed"
           >
-            <Github className="w-5 h-5" />
-            View Source Code
-          </motion.a>
-          <motion.a
-            href="#"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl text-white transition-colors"
+            <Github className="w-5 h-5" aria-hidden="true" />
+            View Source Code (Soon)
+          </span>
+          <span
+            aria-disabled="true"
+            title="Live demo link coming soon"
+            className="flex items-center gap-2 px-6 py-3 min-h-11 rounded-xl text-white/80 transition-colors cursor-not-allowed"
             style={{ background: project.accentColor }}
           >
-            <ExternalLink className="w-5 h-5" />
-            Live Demo
-          </motion.a>
+            <ExternalLink className="w-5 h-5" aria-hidden="true" />
+            Live Demo (Soon)
+          </span>
         </motion.div>
       </Container>
     </main>

@@ -115,22 +115,23 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
               >
                 <Image
                   src={author.avatar}
-                  alt={author.name}
+                  alt=""
                   fill
                   sizes="40px"
+                  loading="lazy"
                   className="object-cover"
                 />
               </div>
             ))}
           </div>
           <div>
-            <cite>
-              <h3 className="mb-0.5 leading-tight not-italic max-lg:text-sm">
+            <p className="mb-0.5 leading-tight max-lg:text-sm text-neutrals-50 font-semibold">
+              <cite className="not-italic">
                 {testimonial.authors.length === 1 
                   ? testimonial.authors[0]?.name
                   : testimonial.authors.map(author => author.name).join(' & ')}
-              </h3>
-            </cite>
+              </cite>
+            </p>
             <p className="text-neutrals-200 text-xs lg:text-sm">{testimonial.authors[0]?.position}</p>
           </div>
         </div>

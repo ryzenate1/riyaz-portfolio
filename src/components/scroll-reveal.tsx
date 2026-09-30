@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
 
 interface ScrollRevealProps {
@@ -32,9 +32,10 @@ export function ScrollReveal({
     once, 
     amount: threshold 
   });
+  const shouldReduceMotion = useReducedMotion();
 
-  // If noAnimation, just render children without any animation
-  if (noAnimation) {
+  // If noAnimation or the user prefers reduced motion, render without animation
+  if (noAnimation || shouldReduceMotion) {
     return <div className={cn(className)}>{children}</div>;
   }
 
@@ -95,6 +96,11 @@ export function StaggerReveal({
 }: StaggerRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return <div className={cn(className)}>{children}</div>;
+  }
 
   const getDirection = () => {
     switch (direction) {
@@ -159,6 +165,11 @@ interface TextRevealProps {
 export function TextReveal({ children, className, delay = 0 }: TextRevealProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return <span className={cn('inline-block', className)}>{children}</span>;
+  }
 
   return (
     <span ref={ref} className={cn('inline-block overflow-hidden', className)}>

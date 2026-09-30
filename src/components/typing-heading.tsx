@@ -1,7 +1,7 @@
 'use client';
 
 import { usePreviousState } from '@/hooks/use-previous-state';
-import { AnimatePresence, motion, type Variants } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion, type Variants } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 
 const typingSpeed = 0.125;
@@ -46,6 +46,7 @@ function TypingHeading({ headings }: { headings: string[] }) {
   const [typingMode, setTypingMode] = useState<TypingMode>('typing');
   const [headingIndex, setHeadingIndex] = useState(0);
   const previousHeadingIndex = usePreviousState(0, headingIndex);
+  const shouldReduceMotion = useReducedMotion();
 
   const currentHeading = headings[headingIndex]!;
   const previousHeading = headings[previousHeadingIndex]!;
@@ -70,10 +71,20 @@ function TypingHeading({ headings }: { headings: string[] }) {
   }, [currentHeading.length, headingIndex, headings.length, previousHeading.length, typingMode]);
 
   useEffect(() => {
+    if (shouldReduceMotion) return;
     const typingTimer = updateTypingModeTimer();
 
     return () => clearTimeout(typingTimer);
-  }, [typingMode, updateTypingModeTimer]);
+  }, [typingMode, updateTypingModeTimer, shouldReduceMotion]);
+
+  // When the user prefers reduced motion, render a static heading
+  if (shouldReduceMotion) {
+    return (
+      <div className="mb-4 text-4xl font-bold text-neutrals-50 md:text-5xl" style={{ fontFamily: 'Poppins, sans-serif' }}>
+        <h2>{headings[0]}</h2>
+      </div>
+    );
+  }
 
   return (
     <div className="mb-4 text-4xl font-bold text-neutrals-50 md:text-5xl" style={{ fontFamily: 'Poppins, sans-serif' }}>

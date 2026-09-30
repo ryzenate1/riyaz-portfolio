@@ -14,13 +14,15 @@ export function CasualFooter() {
             <Link 
               href="https://github.com/ryzenate1" 
               target="_blank"
+              rel="noopener noreferrer"
               className="text-white/60 hover:text-white text-sm transition-colors"
             >
               github
             </Link>
             <Link 
-              href="https://linkedin.com" 
+              href="https://www.linkedin.com/in/riyazakthar" 
               target="_blank"
+              rel="noopener noreferrer"
               className="text-white/60 hover:text-white text-sm transition-colors"
             >
               linkedin

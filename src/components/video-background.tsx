@@ -11,14 +11,14 @@ function VideoBackground() {
     >
       <Image
         src={bgImage}
-        alt="Background"
+        alt=""
         fill
         className="object-cover opacity-80"
         priority
+        fetchPriority="high"
         placeholder="blur"
-        quality={100}
+        quality={80}
         sizes="100vw"
-        unoptimized
       />
     </div>
   );

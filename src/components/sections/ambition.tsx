@@ -265,6 +265,7 @@ export default function AmbitionSection() {
                         type="text" 
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
+                        aria-label="Type your response and press Enter"
                         className="bg-transparent border-none outline-none text-white font-mono text-sm flex-1 caret-white"
                         autoFocus
                         spellCheck={false}

@@ -349,21 +349,23 @@ function ProjectCarousel({ projects }: { projects: Project[] }) {
         >
           <button
             type="button"
-            onPointerDown={scrollToPreviousSlide}
+            onClick={scrollToPreviousSlide}
             title="Previous project slide"
+            aria-label="Previous project slide"
             aria-controls="project-carousel"
             disabled={currentSlide === 0}
-            className="border-neutrals-600 bg-neutrals-900/90 text-neutrals-100 supports-backdrop-filter:bg-neutrals-900/60 pointer-events-auto aspect-square h-fit rounded-full border p-4 drop-shadow-md backdrop-blur-sm transition-transform not-disabled:active:scale-90 disabled:cursor-not-allowed disabled:opacity-50"
+            className="border-neutrals-600 bg-neutrals-900/90 text-neutrals-100 supports-backdrop-filter:bg-neutrals-900/60 pointer-events-auto aspect-square h-fit rounded-full border p-4 drop-shadow-md backdrop-blur-sm transition-transform not-disabled:active:scale-90 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <Icons.ChevronLeft className="size-5" />
           </button>
           <button
             type="button"
-            onPointerDown={scrollToNextSlide}
+            onClick={scrollToNextSlide}
             title="Next project slide"
+            aria-label="Next project slide"
             aria-controls="project-carousel"
             disabled={currentSlide === projects.length - 1}
-            className="border-neutrals-600 bg-neutrals-900/90 text-neutrals-100 supports-backdrop-filter:bg-neutrals-900/60 pointer-events-auto aspect-square h-fit rounded-full border p-4 drop-shadow-md backdrop-blur-sm transition-transform not-disabled:active:scale-90 disabled:cursor-not-allowed disabled:opacity-50"
+            className="border-neutrals-600 bg-neutrals-900/90 text-neutrals-100 supports-backdrop-filter:bg-neutrals-900/60 pointer-events-auto aspect-square h-fit rounded-full border p-4 drop-shadow-md backdrop-blur-sm transition-transform not-disabled:active:scale-90 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <Icons.ChevronRight className="size-5" />
           </button>

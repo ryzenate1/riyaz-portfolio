@@ -55,6 +55,8 @@ export function CasualHeader() {
         {isNavigating && (
           <motion.div
             className="fixed inset-0 z-[9999] bg-[#0f0f1a] flex flex-col items-center justify-center"
+            role="status"
+            aria-label="Switching to Pro Mode"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -90,8 +92,8 @@ export function CasualHeader() {
               Loading the professional side...
             </motion.p>
 
-            {/* Animated dots */}
-            <motion.div className="flex gap-2 mt-6">
+            {/* Animated dots (decorative) */}
+            <motion.div aria-hidden="true" className="flex gap-2 mt-6">
               {[0, 1, 2].map((i) => (
                 <motion.div
                   key={i}
@@ -132,7 +134,10 @@ export function CasualHeader() {
                 <button
                   type="button"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="rounded-full px-3 py-1.5 transition-colors duration-500 lg:hidden"
+                  aria-expanded={isMobileMenuOpen}
+                  aria-controls="casual-mobile-nav"
+                  aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+                  className="rounded-full px-3 py-1.5 min-h-11 min-w-11 flex items-center justify-center transition-colors duration-500 lg:hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#404040]"
                 >
                   <div className="relative size-5">
                     <span
@@ -148,7 +153,7 @@ export function CasualHeader() {
                       )}
                     />
                   </div>
-                  <span className="sr-only">Toggle Menu</span>
+                  <span className="sr-only">{isMobileMenuOpen ? 'Close menu' : 'Open menu'}</span>
                 </button>
 
                 {/* Desktop navigation */}
@@ -276,6 +281,7 @@ export function CasualHeader() {
                     
                     {/* Casual side icon - sun */}
                     <motion.div
+                      aria-hidden="true"
                       className="absolute left-[8px] text-sm z-10"
                       animate={{ 
                         opacity: isToggleHovered ? 0.2 : 1,
@@ -288,6 +294,7 @@ export function CasualHeader() {
                     
                     {/* Pro side icon - moon */}
                     <motion.div
+                      aria-hidden="true"
                       className="absolute right-[8px] text-sm z-10"
                       animate={{ 
                         opacity: isToggleHovered ? 1 : 0.3,
@@ -336,13 +343,13 @@ export function CasualHeader() {
             transition={{ duration: 0.15 }}
             className="fixed top-[72px] left-4 right-4 sm:left-auto sm:right-auto sm:w-48 z-[100] bg-[#2a2a2a] backdrop-blur-lg rounded-xl overflow-hidden lg:hidden shadow-xl"
           >
-            <nav className="flex flex-col py-2">
+            <nav id="casual-mobile-nav" aria-label="Mobile" className="flex flex-col py-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-gray-200 hover:text-white hover:tracking-wider px-4 py-2.5 text-sm uppercase transition-all"
+                  className="text-gray-200 hover:text-white hover:tracking-wider px-4 py-3 min-h-11 flex items-center text-sm uppercase transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                   {link.label}
                 </Link>
@@ -353,9 +360,9 @@ export function CasualHeader() {
                   setIsMobileMenuOpen(false);
                   handleToggleClick();
                 }}
-                className="text-gray-200 hover:text-white hover:tracking-wider px-4 py-2.5 text-sm uppercase transition-all text-left border-t border-gray-600 mt-2 pt-3"
+                className="text-gray-200 hover:text-white hover:tracking-wider px-4 py-3 min-h-11 flex items-center text-sm uppercase transition-all text-left border-t border-gray-600 mt-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
-                Pro Mode 🌙
+                Pro Mode
               </button>
             </nav>
           </motion.div>

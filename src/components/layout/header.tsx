@@ -10,15 +10,11 @@ import Link from 'next/link';
 const links = [
   {
     label: 'About',
-    href: '/#about',
+    href: '/pro#about',
   },
   {
     label: 'Work',
-    href: '/#work',
-  },
-  {
-    label: 'Services',
-    href: '/#services',
+    href: '/pro#work',
   },
   {
     label: 'Games',
@@ -33,7 +29,6 @@ function Header() {
 
   return (
     <header
-      aria-label="Primary"
       className="fixed top-0 z-40 w-full"
     >
       <Container>
@@ -87,9 +82,13 @@ function Header() {
                 isGhost
                 className="rounded-full"
               >
-                <Link href="/#contact">
+                <a
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=riyazakthar46@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Hit us up
-                </Link>
+                </a>
               </Button>
             </div>
           </div>

@@ -11,7 +11,7 @@ export default function NotFoundSection() {
         <div className="relative z-10 flex flex-col items-center text-center">
           <div
             aria-hidden="true"
-            className="relative select-none text-[12rem] font-bold text-neutrals-50 before:absolute before:inset-0 before:start-0.5 before:animate-glitch-1 before:bg-neutrals-900 before:content-['404'] before:[clip:rect(85px,550px,140px,0)] after:absolute after:inset-0 after:-start-0.5 after:animate-glitch-2 after:bg-neutrals-900 after:content-['404'] after:[clip:rect(24px,550px,90px,0)] before:motion-reduce:animate-none after:motion-reduce:animate-none lg:text-[16rem]"
+            className="relative select-none text-[clamp(6rem,30vw,12rem)] font-bold text-neutrals-50 before:absolute before:inset-0 before:start-0.5 before:animate-glitch-1 before:bg-neutrals-900 before:content-['404'] before:[clip:rect(85px,550px,140px,0)] after:absolute after:inset-0 after:-start-0.5 after:animate-glitch-2 after:bg-neutrals-900 after:content-['404'] after:[clip:rect(24px,550px,90px,0)] before:motion-reduce:animate-none after:motion-reduce:animate-none lg:text-[16rem]"
           >
             404
           </div>

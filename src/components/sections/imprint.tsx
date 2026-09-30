@@ -34,12 +34,17 @@ export default function ImprintSection() {
               <Paragraph>
                 E-Mail:
                 <a
-                  href="mailto:hello@ryzen.studio"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=riyazakthar46@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   title="Hit us up"
                   className="text-neutrals-100 hover:text-primary border-b border-current transition-colors"
                 >
-                  hello@ryzen.studio</a
-                ><br />Phone number: 7200672127
+                  riyazakthar46@gmail.com</a
+                ><br />Phone number: <a
+                  href="tel:+917200672127"
+                  className="text-neutrals-100 hover:text-primary border-b border-current transition-colors"
+                >7200672127</a>
               </Paragraph>
             </div>
           </address>

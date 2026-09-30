@@ -55,7 +55,7 @@ const games: Game[] = [
 
 export default function GamesPage() {
   return (
-    <main className="min-h-screen py-32">
+    <main className="min-h-screen bg-neutrals-900 text-neutrals-50 py-32">
       <Container>
         {/* Header */}
         <div className="mb-20">
@@ -130,7 +130,7 @@ export default function GamesPage() {
           className="mt-20 pt-8 border-t border-neutrals-800"
         >
           <Link
-            href="/"
+            href="/pro"
             className="text-sm text-neutrals-500 hover:text-neutrals-300 transition-colors"
           >
             ← Back

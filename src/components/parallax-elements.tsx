@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
 interface ParallaxElementProps {
@@ -13,7 +13,9 @@ interface ParallaxElementProps {
 }
 
 // Individual parallax element
-export function ParallaxElement({
+// Memoized: props are static per instance; avoids re-subscribing scroll
+// listeners on parent re-renders.
+export const ParallaxElement = memo(function ParallaxElement({
   children,
   className,
   speed = -0.2,
@@ -38,7 +40,7 @@ export function ParallaxElement({
       {children}
     </motion.div>
   );
-}
+});
 
 // Floating orb/glow that moves on scroll (like GitHub clouds)
 interface FloatingOrbProps {
@@ -49,7 +51,7 @@ interface FloatingOrbProps {
   blur?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
-export function FloatingOrb({
+export const FloatingOrb = memo(function FloatingOrb({
   className,
   size = 'md',
   color = 'primary',
@@ -89,6 +91,7 @@ export function FloatingOrb({
   return (
     <motion.div
       ref={ref}
+      aria-hidden
       className={cn(
         'absolute rounded-full pointer-events-none',
         sizeClasses[size],
@@ -99,7 +102,7 @@ export function FloatingOrb({
       style={{ y, opacity }}
     />
   );
-}
+});
 
 // Container with multiple floating orbs for atmospheric effect
 interface ParallaxAtmosphereProps {
@@ -107,7 +110,7 @@ interface ParallaxAtmosphereProps {
   variant?: 'hero' | 'section' | 'minimal';
 }
 
-export function ParallaxAtmosphere({ className, variant = 'section' }: ParallaxAtmosphereProps) {
+export const ParallaxAtmosphere = memo(function ParallaxAtmosphere({ className, variant = 'section' }: ParallaxAtmosphereProps) {
   if (variant === 'hero') {
     return (
       <div className={cn('absolute inset-0 overflow-hidden pointer-events-none', className)}>
@@ -169,7 +172,7 @@ export function ParallaxAtmosphere({ className, variant = 'section' }: ParallaxA
       />
     </div>
   );
-}
+});
 
 // Scroll-linked fade in/out for sections
 interface ScrollFadeProps {
@@ -177,7 +180,7 @@ interface ScrollFadeProps {
   className?: string;
 }
 
-export function ScrollFade({ children, className }: ScrollFadeProps) {
+export const ScrollFade = memo(function ScrollFade({ children, className }: ScrollFadeProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -196,4 +199,4 @@ export function ScrollFade({ children, className }: ScrollFadeProps) {
       {children}
     </motion.div>
   );
-}
+});

@@ -16,12 +16,22 @@ import { useEffect, useCallback } from 'react';
  * - Developer tools shortcuts
  */
 export function ContentProtection({ children }: { children: React.ReactNode }) {
+  const isEditableTarget = useCallback((e: Event) => {
+    const t = e.target as HTMLElement | null;
+    // Never interfere with form fields: users must be able to copy/paste/select.
+    return !!t?.closest?.('input, textarea, select, [contenteditable="true"]');
+  }, []);
+
   const handleContextMenu = useCallback((e: MouseEvent) => {
+    if (e.target instanceof HTMLElement && e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
     e.preventDefault();
     return false;
   }, []);
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    // Never block editing shortcuts inside form fields.
+    const target = e.target as HTMLElement | null;
+    if (target?.closest?.('input, textarea, select, [contenteditable="true"]')) return;
     // Prevent common copy/save shortcuts
     const key = e.key.toLowerCase();
     const ctrlOrCmd = e.ctrlKey || e.metaKey;
@@ -49,24 +59,28 @@ export function ContentProtection({ children }: { children: React.ReactNode }) {
   }, []);
 
   const handleCopy = useCallback((e: ClipboardEvent) => {
+    if (isEditableTarget(e)) return;
     e.preventDefault();
     return false;
-  }, []);
+  }, [isEditableTarget]);
 
   const handleCut = useCallback((e: ClipboardEvent) => {
+    if (isEditableTarget(e)) return;
     e.preventDefault();
     return false;
-  }, []);
+  }, [isEditableTarget]);
 
   const handlePaste = useCallback((e: ClipboardEvent) => {
+    if (isEditableTarget(e)) return;
     e.preventDefault();
     return false;
-  }, []);
+  }, [isEditableTarget]);
 
   const handleSelectStart = useCallback((e: Event) => {
+    if (isEditableTarget(e)) return;
     e.preventDefault();
     return false;
-  }, []);
+  }, [isEditableTarget]);
 
   const handleBeforePrint = useCallback(() => {
     // Hide content before printing
@@ -133,6 +147,7 @@ export function ContentProtection({ children }: { children: React.ReactNode }) {
     handleSelectStart,
     handleBeforePrint,
     handleAfterPrint,
+    isEditableTarget,
   ]);
 
   return <>{children}</>;

@@ -10,12 +10,8 @@ const securityHeaders = [
     value: 'max-age=63072000; includeSubDomains; preload',
   },
   {
-    key: 'X-XSS-Protection',
-    value: '1; mode=block',
-  },
-  {
     key: 'X-Frame-Options',
-    value: 'SAMEORIGIN',
+    value: 'DENY',
   },
   {
     key: 'X-Content-Type-Options',
@@ -41,6 +37,8 @@ const securityHeaders = [
       "frame-ancestors 'none'",
       "form-action 'self'",
       "base-uri 'self'",
+      "object-src 'none'",
+      'upgrade-insecure-requests',
     ].join('; '),
   },
 ];
@@ -73,6 +71,10 @@ const nextConfig: NextConfig = {
     ],
     // Optimize images
     formats: ['image/avif', 'image/webp'],
+    // Trimmed variant lists: defaults include 2048/3840w which generate
+    // oversized variants rarely served to real viewports.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
     dangerouslyAllowSVG: false,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -117,6 +119,10 @@ const nextConfig: NextConfig = {
       '@radix-ui/react-popover',
       '@radix-ui/react-slot',
       '@radix-ui/react-label',
+      '@headlessui/react',
+      '@heroicons/react',
+      'react-hook-form',
+      'zod',
     ],
   },
 };

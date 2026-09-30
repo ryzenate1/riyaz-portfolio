@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 // Animation Variants
 const containerVariant = {
@@ -37,19 +37,24 @@ const AnimatedText = () => {
   const targetText = "Hello, I'm Riyaz";
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
 
-  // Typewriter effect
+  // Typewriter effect (completes instantly when the user prefers reduced motion)
   useEffect(() => {
-    if (currentIndex < targetText.length) {
+    if (currentIndex >= targetText.length) return;
+    if (shouldReduceMotion) {
       const timeoutId = setTimeout(() => {
-        setDisplayText(targetText.substring(0, currentIndex + 1));
-        setCurrentIndex((prev) => prev + 1);
-      }, 80);
+        setDisplayText(targetText);
+        setCurrentIndex(targetText.length);
+      }, 0);
       return () => clearTimeout(timeoutId);
     }
-    // Return void for consistency
-    return;
-  }, [currentIndex, targetText]);
+    const timeoutId = setTimeout(() => {
+      setDisplayText(targetText.substring(0, currentIndex + 1));
+      setCurrentIndex((prev) => prev + 1);
+    }, 80);
+    return () => clearTimeout(timeoutId);
+  }, [currentIndex, targetText, shouldReduceMotion]);
 
   const titleH1Class =
     'font-extrabold tracking-tight uppercase leading-tight text-white';
@@ -60,10 +65,11 @@ const AnimatedText = () => {
     <div className="flex flex-col items-center justify-center text-center px-4">
       {/* Typing Animation */}
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={shouldReduceMotion ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.5 }}
-        className="text-[35px] sm:text-[47px] md:text-[47px] lg:text-[59px] font-mono text-[#39FF14] mb-4 sm:mb-6 md:mb-8 lg:mb-10 whitespace-nowrap leading-tight"
+        aria-hidden="true"
+        className="text-[clamp(1.5rem,6vw,3.7rem)] font-mono text-[#39FF14] mb-4 sm:mb-6 md:mb-8 lg:mb-10 leading-tight"
         style={{
           textShadow: '0 0 8px rgba(57, 255, 20, 0.6)',
           fontFamily: 'JetBrains Mono, monospace'
@@ -73,8 +79,8 @@ const AnimatedText = () => {
           {displayText}
           <motion.span
             initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ duration: 0.7, repeat: Infinity, repeatType: 'loop' }}
+            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: [0, 1, 0] }}
+            transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.7, repeat: Infinity, repeatType: 'loop' }}
             className="ml-1 inline-block align-middle w-[8px] sm:w-[10px] h-[1.2em] ml-[2px]"
             style={{
               backgroundColor: '#79c0ff',
@@ -85,75 +91,37 @@ const AnimatedText = () => {
           </motion.span>
         </div>
       </motion.div>
+      <p className="sr-only">Hello, I&apos;m Riyaz — Full-Stack Developer</p>
 
-      {/* FULL-STACK */}
-      <div className="relative self-center mt-2 will-change-transform" style={{ transform: 'translateZ(0)' }}>
-        <motion.h1
-          variants={containerVariant}
-          initial="hidden"
-          animate="visible"
-          custom={0}
-          className={`${titleH1Class} text-[59px] sm:text-[71px] md:text-[71px] lg:text-[95px] xl:text-[127px] text-center mb-2 whitespace-nowrap`}
-          style={{
-            textShadow: '0 0 8px rgba(255, 255, 255, 0.5)',
-            ...poppinsStyle,
-          }}
-        >
+      {/* Single h1 for SEO: one top-level heading with stacked lines */}
+      <motion.h1
+        id="hero-heading"
+        variants={containerVariant}
+        initial={shouldReduceMotion ? false : "hidden"}
+        animate="visible"
+        custom={0}
+        className={`${titleH1Class} text-center mb-2`}
+        style={{
+          textShadow: '0 0 8px rgba(255, 255, 255, 0.5)',
+          ...poppinsStyle,
+        }}
+      >
+        {/* FULL-STACK */}
+        <span className="block text-[clamp(2rem,11vw,7.9rem)] leading-[1.05]">
           {Array.from('FULL-STACK').map((letter, index) => (
             <AnimatedLetter key={index} letter={letter} variants={letterVariant} />
           ))}
-        </motion.h1>
-      </div>
+        </span>
 
-      {/* DEVELOPER & */}
-      <div className="relative self-center mt-2 will-change-transform" style={{ transform: 'translateZ(0)' }}>
-        <motion.h1
-          variants={containerVariant}
-          initial="hidden"
-          animate="visible"
-          custom={1}
-          className={`${titleH1Class} text-[59px] sm:text-[71px] md:text-[71px] lg:text-[95px] xl:text-[127px] text-center mb-2`}
-          style={{
-            textShadow: '0 0 8px rgba(255, 255, 255, 0.5)',
-            ...poppinsStyle,
-          }}
-        >
-          <div className="inline">
+        {/* DEVELOPER */}
+        <span className="mt-2 block text-[clamp(2rem,11vw,7.9rem)] leading-[1.05]">
+          <span className="inline">
             {Array.from('DEVELOPER').map((letter, index) => (
               <AnimatedLetter key={`developer-${index}`} letter={letter} variants={letterVariant} />
             ))}
-          </div>
-          <span className="text-[#39FF14] ml-2 sm:ml-4" style={{ textShadow: '0 0 8px rgba(57, 255, 20, 0.6)' }}>
-            &amp;
           </span>
-        </motion.h1>
-      </div>
-
-      {/* KINESIOLOGY ENTHUSIAST */}
-      <div className="relative self-center mt-2 will-change-transform" style={{ transform: 'translateZ(0)' }}>
-        <motion.h1
-          variants={containerVariant}
-          initial="hidden"
-          animate="visible"
-          custom={2}
-          className={`${titleH1Class} text-[47px] sm:text-[59px] md:text-[59px] lg:text-[71px] xl:text-[95px] text-center`}
-          style={{
-            textShadow: '0 0 8px rgba(255, 255, 255, 0.5)',
-            ...poppinsStyle,
-          }}
-        >
-          <div className="block sm:inline">
-            {Array.from('KINESIOLOGY').map((letter, index) => (
-              <AnimatedLetter key={`kinesiology-${index}`} letter={letter} variants={letterVariant} />
-            ))}
-          </div>
-          <div className="block sm:inline sm:ml-4 md:ml-6 mt-1 sm:mt-0">
-            {Array.from('ENTHUSIAST').map((letter, index) => (
-              <AnimatedLetter key={`enthusiast-${index}`} letter={letter} variants={letterVariant} />
-            ))}
-          </div>
-        </motion.h1>
-      </div>
+        </span>
+      </motion.h1>
     </div>
   );
 };

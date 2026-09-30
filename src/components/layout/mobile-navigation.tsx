@@ -24,8 +24,11 @@ function MobileNavigation({
       <PopoverTrigger asChild>
         <button
           type="button"
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation-menu"
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
           className={cn(
-            'rounded-full px-3 py-1.5 transition-colors duration-500 md:px-4 md:py-2',
+            'rounded-full px-3 py-1.5 transition-colors duration-500 md:px-4 md:py-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary min-h-11 min-w-11 flex items-center justify-center',
             className,
           )}
         >
@@ -43,7 +46,7 @@ function MobileNavigation({
               )}
             />
           </div>
-          <span className="sr-only">Toggle Menu</span>
+          <span className="sr-only">{isOpen ? 'Close menu' : 'Open menu'}</span>
         </button>
       </PopoverTrigger>
       <PopoverContent
@@ -53,7 +56,8 @@ function MobileNavigation({
         alignOffset={-8}
       >
         <nav
-          aria-label="Primary"
+          id="mobile-navigation-menu"
+          aria-label="Mobile"
           className="divide-y-0.5 divide-neutrals-600 flex flex-col justify-center"
         >
           {links.map((link, index) => (
@@ -61,7 +65,7 @@ function MobileNavigation({
               key={index}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="text-neutrals-200 hover:text-neutrals-50 focus-visible:text-neutrals-50 p-2 text-sm uppercase transition-[letter-spacing,color] hover:tracking-wider focus-visible:tracking-wider"
+              className="text-neutrals-200 hover:text-neutrals-50 focus-visible:text-neutrals-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary p-3 text-sm uppercase transition-[letter-spacing,color] hover:tracking-wider focus-visible:tracking-wider min-h-11 flex items-center"
             >
               {link.label}
             </a>

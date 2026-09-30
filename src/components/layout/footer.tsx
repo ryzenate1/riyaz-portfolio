@@ -1,29 +1,19 @@
 'use client';
 
-import { useState } from 'react';
 import { CopyrightText } from '@/components/layout/copyright-text';
 import { Container } from '@/components/ui/container';
 import { Icons } from '@/components/ui/icons';
 import { siteConfig } from '@/lib/config/site';
-import { UnderConstructionDialog } from '@/components/ui/under-construction-dialog';
 import Link from 'next/link';
 
 const primaryLinks = [
   {
     label: 'About',
-    href: '/#about',
+    href: '/pro#about',
   },
   {
     label: 'Work',
-    href: '/#work',
-  },
-  {
-    label: 'Customer Stories',
-    href: '/#stories',
-  },
-  {
-    label: 'Services',
-    href: '/#services',
+    href: '/pro#work',
   },
   {
     label: 'Games',
@@ -31,7 +21,7 @@ const primaryLinks = [
   },
   {
     label: 'Contact',
-    href: '/#contact',
+    href: '/pro#contact',
   },
 ] as const;
 
@@ -47,44 +37,23 @@ const socials = [
     label: 'View GitHub profile',
     href: siteConfig.links.github,
     icon: Icons.GitHub,
-    isUnderConstruction: true,
   },
   {
     label: 'View Instagram profile',
     href: siteConfig.links.instagram,
     icon: Icons.Instagram,
-    isUnderConstruction: false,
   },
   {
     label: 'View LinkedIn profile',
     href: siteConfig.links.linkedin,
     icon: Icons.LinkedIn,
-    isUnderConstruction: true,
   },
 ] as const;
 
 export default function Footer() {
-  const [showDialog, setShowDialog] = useState(false);
-  const [dialogTitle, setDialogTitle] = useState('');
-
-  const handleUnderConstruction = (e: React.MouseEvent, label: string) => {
-    e.preventDefault();
-    const platformName = label.replace('View ', '').replace(' profile', '');
-    setDialogTitle(`🚧 ${platformName} Link Coming Soon`);
-    setShowDialog(true);
-  };
-
   return (
-    <>
-      <UnderConstructionDialog
-        isOpen={showDialog}
-        onClose={() => setShowDialog(false)}
-        title={dialogTitle}
-        message="We regret the inconvenience! This link is being set up. Please connect with us through these alternative platforms:"
-      />
-      
-      <footer
-        aria-label="Primary"
+    <footer
+        aria-label="Footer"
         className="border-neutrals-600 bg-neutrals-900 relative z-10 w-full border-t-[0.5px] py-3"
       >
       <Container>
@@ -122,16 +91,15 @@ export default function Footer() {
             aria-label="Socials"
             className="flex flex-wrap justify-center gap-2"
           >
-            {socials.map(({ label, href, icon: Icon, isUnderConstruction }) => (
+            {socials.map(({ label, href, icon: Icon }) => (
               <li key={label}>
                 <a
                   href={href}
-                  title={isUnderConstruction ? `${label} (Coming Soon)` : label}
+                  title={label}
                   aria-label={label}
                   rel="noreferrer"
-                  target={isUnderConstruction ? undefined : "_blank"}
-                  onClick={isUnderConstruction ? (e) => handleUnderConstruction(e, label) : undefined}
-                  className="text-neutrals-300 hover:text-neutrals-50 focus-visible:text-neutrals-50 transition-colors cursor-pointer"
+                  target="_blank"
+                  className="text-neutrals-300 hover:text-neutrals-50 focus-visible:text-neutrals-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors cursor-pointer inline-flex min-h-11 min-w-11 items-center justify-center p-2"
                 >
                   <Icon
                     aria-hidden
@@ -147,6 +115,5 @@ export default function Footer() {
         </div>
       </Container>
     </footer>
-    </>
   );
 }

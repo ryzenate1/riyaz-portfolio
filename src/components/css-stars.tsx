@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
+import { memo, useMemo } from 'react';
 
 interface CSSStarsProps {
   className?: string;
@@ -15,14 +15,16 @@ function seededRandom(seed: number) {
   return x - Math.floor(x);
 }
 
-// CSS-only stars - zero JavaScript animation, pure performance
-export function CSSStars({ 
-  className, 
+// CSS-only stars - zero JavaScript animation, pure performance.
+// Memoized: star positions are deterministic (seeded) so re-renders
+// (e.g. route changes via GlobalStarsBackground) reuse the same DOM.
+export const CSSStars = memo(function CSSStars({
+  className,
   count = 150,
-  opacity = 0.8 
+  opacity = 0.8
 }: CSSStarsProps) {
-  // Generate star positions once on mount using seeded random
-  const [stars] = useState(() => {
+  // Generate star positions once using seeded random (SSR-consistent)
+  const stars = useMemo(() => {
     return Array.from({ length: count }, (_, i) => ({
       id: i,
       left: `${seededRandom(i * 3) * 100}%`,
@@ -30,7 +32,7 @@ export function CSSStars({
       size: seededRandom(i * 11 + 2) * 2 + 0.5,
       opacity: seededRandom(i * 13 + 3) * opacity,
     }));
-  });
+  }, [count, opacity]);
 
   return (
     <div 
@@ -55,7 +57,7 @@ export function CSSStars({
       ))}
     </div>
   );
-}
+});
 
 // Alternative: CSS-only using radial gradients (even more performant)
 export function CSSStarsGradient({ className }: { className?: string }) {

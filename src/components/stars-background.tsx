@@ -1,58 +1,20 @@
 'use client';
 
-import { useCallback } from 'react';
-import { Particles } from 'react-particles';
-import type { Engine } from 'tsparticles-engine';
-import { loadSlim } from 'tsparticles-slim';
+import { memo } from 'react';
+import { CSSStars } from './css-stars';
 
-function StarsBackground() {
-  const initializeParticleEngine = useCallback(async (engine: Engine) => {
-    await loadSlim(engine);
-  }, []);
-
+// Static star field — CSS-only, zero JS animation.
+// Previously used react-particles + tsparticles-slim for non-animated
+// dots (move: false, opacity/size anim: false), which pulled ~150KB of
+// particle engine into the client bundle for zero visual benefit.
+const StarsBackground = memo(function StarsBackground() {
   return (
-    <Particles
-      options={{
-        particles: {
-          number: {
-            value: 200,
-            density: {
-              enable: true,
-              value_area: 2000,
-            },
-          },
-          color: {
-            value: '#FFFEF9',
-          },
-          shape: {
-            type: 'circle',
-          },
-          opacity: {
-            value: 0.8,
-            random: true,
-            anim: {
-              enable: false,
-            },
-          },
-          size: {
-            value: 1.5,
-            random: true,
-            anim: {
-              enable: false,
-            },
-          },
-          move: {
-            enable: false,
-          },
-        },
-        fullScreen: false,
-        detectRetina: true,
-        fpsLimit: 30,
-      }}
-      init={initializeParticleEngine}
-      className="pointer-events-none absolute inset-0 -z-10 mask-x-from-80%"
+    <CSSStars
+      count={150}
+      opacity={0.8}
+      className="mask-x-from-80%"
     />
   );
-}
+});
 
 export { StarsBackground };

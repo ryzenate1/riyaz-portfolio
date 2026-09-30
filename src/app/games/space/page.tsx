@@ -289,7 +289,7 @@ export default function SpaceGame() {
   };
 
   return (
-    <main className="min-h-screen py-32">
+    <main className="min-h-screen bg-neutrals-900 text-neutrals-50 py-32">
       <Container>
         {/* Header */}
         <div className="max-w-md mx-auto mb-12">

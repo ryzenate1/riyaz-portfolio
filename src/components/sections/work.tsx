@@ -21,9 +21,9 @@ export default async function WorkSection() {
         <ScrollReveal direction="up" delay={0.1}>
           <div className="flex flex-col items-center text-center mb-12">
             <Caption id="work-heading">Work</Caption>
-            <Heading className="tracking-tight">Selected Projects</Heading>
+            <Heading className="tracking-tight">Demo UI/UX Projects</Heading>
             <Paragraph>
-              Swipe through my projects · Tap for deep dives with live demos
+              Swipe through demo UI/UX projects · Tap for deep dives with live demos
             </Paragraph>
           </div>
         </ScrollReveal>

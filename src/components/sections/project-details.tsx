@@ -10,6 +10,17 @@ type Props = {
   project: Project;
 };
 
+// CMS URLs are author-controlled; only allow http(s) to block `javascript:` etc.
+function isSafeHttpUrl(url: string | undefined): url is string {
+  if (!url) return false;
+  try {
+    const parsed = new URL(url, 'https://ryzenstudio.com');
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
 export default function ProjectDetailsSection({ project }: Props) {
   return (
     <>
@@ -21,6 +32,7 @@ export default function ProjectDetailsSection({ project }: Props) {
         <img
           alt={project.poster.alt}
           loading="eager"
+          fetchPriority="high"
           decoding="sync"
           className="absolute inset-0 h-full w-full object-cover object-center"
           style={{
@@ -34,7 +46,7 @@ export default function ProjectDetailsSection({ project }: Props) {
         <Container>
           <div className="relative z-10 flex h-full flex-col justify-end">
             <Link
-              href="/#work"
+              href="/pro#work"
               className="group absolute start-0 top-0 flex items-center justify-center transition-opacity hover:opacity-80 focus-visible:opacity-80"
             >
               <Icons.ArrowLongLeft
@@ -61,14 +73,14 @@ export default function ProjectDetailsSection({ project }: Props) {
             <hr className="from-neutrals-50/40 mt-4 mb-8 h-px border-0 bg-gradient-to-r to-transparent" />
             <div className="flex gap-x-4">
               {
-                project.projecturl && (
+                isSafeHttpUrl(project.projecturl) && (
                   <Button
                     asChild
                     size="small"
                   >
                     <a
                       href={project.projecturl}
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       target="_blank"
                     >
                       <Icons.Eye
@@ -81,7 +93,7 @@ export default function ProjectDetailsSection({ project }: Props) {
                 )
               }
               {
-                project.githuburl && (
+                isSafeHttpUrl(project.githuburl) && (
                   <Button
                     asChild
                     size="small"
@@ -89,7 +101,7 @@ export default function ProjectDetailsSection({ project }: Props) {
                   >
                     <a
                       href={project.githuburl}
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       target="_blank"
                     >
                       <Icons.GitHub

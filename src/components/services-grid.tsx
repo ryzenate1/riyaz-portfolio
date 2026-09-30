@@ -54,8 +54,12 @@ function ServicesGrid() {
     <div>
       <div
         ref={scrollRef}
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Services"
+        tabIndex={0}
         onMouseMove={handleMouseMove}
-        className="group gap-6 flex overflow-x-auto snap-x snap-mandatory scroll-smooth lg:grid lg:grid-cols-5 lg:overflow-visible max-lg:gap-4 max-lg:-mx-4 max-lg:px-4 max-lg:scrollbar-hide edge-fade-x"
+        className="group gap-6 flex overflow-x-auto snap-x snap-mandatory scroll-smooth lg:grid lg:grid-cols-5 lg:overflow-visible max-lg:gap-4 max-lg:-mx-4 max-lg:px-4 max-lg:scrollbar-hide edge-fade-x focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
         style={{
           scrollbarWidth: 'none',
           msOverflowStyle: 'none'
@@ -148,19 +152,27 @@ function ServicesGrid() {
       </div>
 
       {/* Sleek mobile navigation dots */}
-      <div className="flex justify-center mt-8 lg:hidden">
-        <div className="flex gap-2">
+      <div className="flex justify-center mt-4 lg:hidden">
+        <div className="flex gap-1" role="tablist" aria-label="Services slides">
           {Array.from({ length: totalSlides }).map((_, index) => (
             <button
               key={index}
+              type="button"
+              role="tab"
+              aria-selected={index === activeSlide}
               onClick={() => scrollToSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === activeSlide
-                  ? 'bg-primary w-8 scale-110'
-                  : 'bg-neutrals-600 hover:bg-neutrals-500'
-              }`}
               aria-label={`Go to slide ${index + 1}`}
-            />
+              className="flex min-h-11 min-w-11 items-center justify-center p-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <span
+                aria-hidden="true"
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === activeSlide
+                    ? 'bg-primary w-8 scale-110'
+                    : 'bg-neutrals-600 hover:bg-neutrals-500 w-2'
+                }`}
+              />
+            </button>
           ))}
         </div>
       </div>

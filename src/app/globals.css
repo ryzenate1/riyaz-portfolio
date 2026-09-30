@@ -350,12 +350,7 @@ button, a, input, textarea, [role='button'], [onclick] {
   -ms-overflow-style: none; /* IE/Edge */
 }
 
-/* Hide scrollbar for all browsers */
-.scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
+/* Hide scrollbar for all browsers (merged: no duplicate rule) */
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Edge */
   width: 0 !important;
@@ -436,4 +431,20 @@ button, a, input, textarea, [role='button'], [onclick] {
 
 .terminal-scrollbar::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #4aff26 0%, #32d44a 100%);
+}
+
+/* Respect users who prefer reduced motion: kill CSS-driven animation,
+   marquee scrolling, and smooth-scroll behavior globally. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
